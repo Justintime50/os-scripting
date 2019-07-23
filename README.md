@@ -25,7 +25,12 @@ The following can be found in the `single-commands` folder and serve a single pu
 - `software-update.sh` - lists all available updates and then installs them without opening the app store. May require admin password.
 
 ## Usage
+
+### Creating Scripts
 When creating a new script, make sure to save the file as a script file `.sh` and make the file executable with `sudo chmod 755 'filename'`.
+
+### Running Scripts
+To run a script, drag it into the terminal or navigate to the directory it's housed in and run `./script-name.sh` and hit enter.
 
 ## Gotchas
 
