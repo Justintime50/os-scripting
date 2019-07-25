@@ -21,8 +21,12 @@ The following can be found in the `single-commands` folder and serve a single pu
 - `enable-filevault.sh` - enables filevault. May require the user to authenticate before it takes effect.
 - `enable-firewall.sh` - disables the firewall. Will require a restart to take effect.
 - `enable-remote-management.sh` - enables remote management and SSH access for admin users.
+- `erase-touchbar-data.sh` - erases the touchbar data for Macs equipped with a touchbar. Used when recycling the device.
+- `force-password-reset.sh` - force the designated user to reset their password on next login.
 - `jamf-enrollment.sh` - allows you to retroactively enroll a device in Jamf. See [this article](https://support.jamfnow.com/s/article/360007191652-Enrolling-a-Computer-via-Automated-MDM-Enrollment-Post-Setup-Assistant) for additional info.
+- `print-device-info.sh` - prints the model and serial of the device.
 - `software-update.sh` - lists all available updates and then installs them without opening the app store. May require admin password.
+- `update-mac-name.sh` - updates the mac's computer name, hostname and bonjour name.
 
 ## Usage
 
