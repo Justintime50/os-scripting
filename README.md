@@ -48,3 +48,6 @@ If a Mac stops being able to inventory, it's probably because the original user 
 
 ### Software Update
 The software update script only updates macOS and 1st party apps. This means 3rd party apps like Slack, 1Password, and others will require an update via the app store or managed software.
+
+### FileVault
+Once FileVault is enabled, the user will need to punch in their password upon restart or shutdown. Additionally, FileVault may only be enabled for the user logged in when the command is run. This means other users on the machine may need to be enabled via the System Preferences GUI to unlock the disk. If they are not granted access, they won't show up on the login screen.
