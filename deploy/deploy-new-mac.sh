@@ -14,12 +14,25 @@ brew install wget
 # Create admin user
 sudo dscl . -create /Users/admin # swap admin for the one-word admin of the user
 sudo dscl . -create /Users/admin UserShell /bin/bash # sets the default shell
-sudo dscl . -create /Users/admin RealName "NAME HERE" # swap the name in quotes for the user's real name
+sudo dscl . -create /Users/admin RealName "Admin" # swap the name in quotes for the user's real name
 sudo dscl . -create /Users/admin UniqueID 1001 # give the user a unique ID not used by another user
 sudo dscl . -create /Users/admin PrimaryGroupID 20 # assign the group id to the user - 20 is staff, 80 is administrator. 20 is default
 sudo dscl . -create /Users/admin NFSHomeDirectory /Users/admin # creates a home folder, swap admin for the real admin, won't be created until first login
 sudo dscl . -passwd /Users/admin redgrapes20 # swap password for the users password
 sudo dscl . -append /Groups/admin GroupMembership admin # This gives the new user administrative privileges. To make the new account a limited user account, skip this step.
+
+# Assign variables to initialize computer name
+MODEL=`sysctl hw.model | sed 's/[0-9, ]//g' | cut -c 10-`
+YEAR=`curl -s https://support-sp.apple.com/sp/product?cc=JG5J | grep -o '\d\d\d\d' | cut -c 3-`
+SERIAL=`system_profiler SPHardwareDataType | awk '/Serial/ {print $4}' | cut -c 7-`
+
+# Change computer name
+COMPUTER_NAME=$MODEL$YEAR-$SERIAL
+sudo scutil --set ComputerName $COMPUTER_NAME && \
+sudo scutil --set HostName $COMPUTER_NAME && \
+sudo scutil --set LocalHostName $COMPUTER_NAME && \
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $COMPUTER_NAME
+dscacheutil -flushcache # flush the DNS cache for good measure
 
 # Turn on Firewall (will require a restart before it shows on)
 sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
@@ -35,5 +48,8 @@ brew cask install google-chrome
 open https://9ghcfm.jamfcloud.com
 sudo profiles renew -type enrollment
 
-# Check for Updates
+# Force a password reset on the current user upon login
+pwpolicy -a $USER -u usertoforcechange -setpolicy "newPasswordRequired=1"
+
+# Check for updates
 sudo softwareupdate -l -i -a
