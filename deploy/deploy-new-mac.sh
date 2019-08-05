@@ -48,8 +48,9 @@ brew cask install google-chrome
 open https://9ghcfm.jamfcloud.com
 sudo profiles renew -type enrollment
 
-# Force a password reset on the current user upon login
-pwpolicy -a $USER -u usertoforcechange -setpolicy "newPasswordRequired=1"
+# Force a password reset on the *current* user upon login
+USER=`id -u -n` # explicitly assign user regardless of login or access
+pwpolicy -a $USER -u $USER -setpolicy "newPasswordRequired=1"
 
 # Check for updates
 sudo softwareupdate -l -i -a
