@@ -1,21 +1,21 @@
 # Mac Scripting
 This is a collection of macOS scripts that can be used to automate certain administrative tasks for a fleet of Macs.
 
-This project is intended to save IT professionals valuable hours configuring macOS.
+This project is intended to save IT professionals valuable hours, reduce user error, and provide consistency configuring macOS.
 
 ## Scripts
 
 ### Deployment Scripts
 The following are an all-inclusive script to deploy a machine, found in the `deploy` folder. All macOS deployments rely on `Homebrew`. Various GUI apps are installed via `Homebrew Cask`.
-- `deploy-new-mac.sh` - deploys a new mac, installing the necessary software, setting up an admin user, changing computer name, enrolling the device in Jamf, forcing a password reset, etc.
-- `deploy-dev-mac.sh` - deploys a mac intended for a software developer. Installs Command Line Tools, Homebrew, wget, npm, Yarn, Node, Python3 & PIP, Git, Docker, VS Code, and Chrome.
+- `deploy-new-mac.command` - deploys a new mac, installing the necessary software, setting up an admin user, changing computer name, enrolling the device in Jamf, forcing a password reset, etc.
+- `deploy-dev-mac.command` - deploys a mac intended for a software developer. Installs Command Line Tools, Homebrew, wget, npm, Yarn, Node, Python3 & PIP, Git, Docker, VS Code, and Chrome.
 
 ### Legacy
 The `legacy` folder contains depricated scripts replaced elsewhere.
 
 ### Single Commands
-The following can be found in the `single-commands` folder and serve a single purpose.
-- `create-user.sh` - creates a user, adds a home folder, and makes them an admin.
+The following can be found in the `single-commands` folder. Each script serves a single purpose.
+- `create-user.sh` - creates a user, adds a home folder, enables Secure Token, and makes them an admin.
 - `delete-user.sh` - deletes a user and their home folder.
 - `disable-filevault.sh` - disables filevault. May require the user to authenticate before it takes effect.
 - `disable-firewall.sh` - disables the firewall. Will require a restart to take effect.
@@ -32,10 +32,12 @@ The following can be found in the `single-commands` folder and serve a single pu
 ## Usage
 
 ### Creating Scripts
-When creating a new script, make sure to save the file as a script file `.sh` and make the file executable with `sudo chmod 755 'filename'`.
+When creating a new script, make sure to save the file as a script file `.sh` or `.command` for double click execution and make the file executable with `sudo chmod 755 <filename>`.
 
 ### Running Scripts
-To run a script, drag it into the terminal or navigate to the directory it's housed in and run `./script-name.sh` and hit enter.
+If a script ends in `.command` the file can simply be double clicked.
+
+If a script ends in `.sh`, drag it into the terminal or navigate to the directory it's housed in and run `./script-name.sh` and hit enter.
 
 ## Gotchas
 

@@ -1,6 +1,20 @@
 #!/bin/bash
 
-# Install Command Line Tools
+###########################
+## DEPLOY NEW MAC SCRIPT ##
+###########################
+
+################
+## Initialize ##
+################
+USER=`id -u -n` # explicitly assign user regardless of login or access
+ADMINPASSWORD="redgrapes20" # set the password for reuse in the script
+
+##################
+## MAIN CONTENT ##
+##################
+
+# Install Command Line Tools (will require user input on pop-up window)
 xcode-select --install
 
 # Install Homebrew
@@ -11,15 +25,13 @@ brew tap caskroom/cask
 # Install wget
 brew install wget
 
-# Create admin user
-sudo dscl . -create /Users/admin # swap admin for the one-word admin of the user
-sudo dscl . -create /Users/admin UserShell /bin/bash # sets the default shell
-sudo dscl . -create /Users/admin RealName "Admin" # swap the name in quotes for the user's real name
-sudo dscl . -create /Users/admin UniqueID 1001 # give the user a unique ID not used by another user
-sudo dscl . -create /Users/admin PrimaryGroupID 20 # assign the group id to the user - 20 is staff, 80 is administrator. 20 is default
-sudo dscl . -create /Users/admin NFSHomeDirectory /Users/admin # creates a home folder, swap admin for the real admin, won't be created until first login
-sudo dscl . -passwd /Users/admin redgrapes20 # swap password for the users password
-sudo dscl . -append /Groups/admin GroupMembership admin # This gives the new user administrative privileges. To make the new account a limited user account, skip this step.
+# Open Jamf Enrollment Page & Run DEP Enrollment Command (only one is necessary depending on how the device was purchased)
+open https://9ghcfm.jamfcloud.com
+sudo profiles renew -type enrollment
+
+# Create the Nozani Admin user and explicitly add SecureToken
+sudo sysadminctl -addUser admin -password $ADMINPASSWORD -fullName "Nozani Admin" -admin
+sysadminctl -adminUser $USER -adminPassword - -secureTokenOn admin -password $ADMINPASSWORD
 
 # Assign variables to initialize computer name
 MODEL=`sysctl hw.model | sed 's/[0-9, ]//g' | cut -c 10-`
@@ -37,20 +49,22 @@ dscacheutil -flushcache # flush the DNS cache for good measure
 # Turn on Firewall (will require a restart before it shows on)
 sudo defaults write /Library/Preferences/com.apple.alf globalstate -int 1
 
-# Enable Remote Management (will require additional configuration through System Preferences)
+# Enable Remote Management (will require additional configuration through System Preferences for Mojave 10.14 and higher)
 sudo systemsetup -setremotelogin on
 sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -activate -configure -access -on -users admin -privs -all -restart -agent -menu
 
 # Install Google Chrome
 brew cask install google-chrome
 
-# Open Jamf Enrollment Page & Run DEP Enrollment Command (only one is necessary depending on how the device was purchased)
-open https://9ghcfm.jamfcloud.com
-sudo profiles renew -type enrollment
+#############
+## CLEANUP ##
+#############
 
 # Force a password reset on the *current* user upon login
-USER=`id -u -n` # explicitly assign user regardless of login or access
 pwpolicy -a $USER -u $USER -setpolicy "newPasswordRequired=1"
+
+# Clear Bash history after running this script
+history -c
 
 # Check for updates
 sudo softwareupdate -l -i -a

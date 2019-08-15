@@ -1,6 +1,10 @@
 #!/bin/bash
 
+###########################
+## DEPLOY DEV MAC SCRIPT ##
+###########################
 
+####################
 ## INITIALIZATION ##
 # Install Command Line Tools
 xcode-select --install
@@ -15,8 +19,7 @@ brew tap homebrew/cask-versions
 # Install wget
 brew install wget
 
-
-
+####################################
 ## PACKAGE MANAGERS AND LANGUAGES ##
 # Install Composer for PHP package management
 curl -sS https://getcomposer.org/installer | php
@@ -30,8 +33,7 @@ brew install node
 brew install python3
 # brew unlink python && brew link python # Used if linking does not work properly during install
 
-
-
+######################
 ## UTILITIES & APPS ##
 # Install Git
 brew install git
@@ -45,7 +47,10 @@ brew cask install visual-studio-code
 # Install Google Chrome
 brew cask install google-chrome
 
-
+#############
+## CLEANUP ##
+# Clear Bash history from this script
+history -c
 
 # Check for updates
 sudo softwareupdate -l -i -a
