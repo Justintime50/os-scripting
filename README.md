@@ -29,6 +29,11 @@ The following can be found in the `single-commands` folder. Each script serves a
 - `software-update.sh` - lists all available updates and then installs them without opening the app store. May require admin password.
 - `update-mac-name.sh` - updates the mac's computer name, hostname and bonjour name.
 
+### Troubleshooting
+The following scripts can be used to troubleshoot macOS
+- `dep-reset-high-sierra.sh` - reset the DEP prompt to appear again on boot up for High Sierra and later.
+- `dep-reset-sierra.sh` - reset the DEP prompt to appear again on boot up for Sierra.
+
 ## Usage
 
 ### Creating Scripts
