@@ -7,11 +7,14 @@
 ################
 ## INITIALIZE ##
 ################
-echo -e "Nozani Deploy Script Started...\n"
+echo -e "Nozani macOS deploy script started...\n"
 USER=`id -u -n` # explicitly assign user regardless of login or access
-ADMINPASSWORD="redgrapes20" # set the password for reuse in the script
-echo -n "Password: "
+echo -n "Current User's Password: "
 read -s PASSWORD
+echo ""
+echo -n "Nozani Admin's Password (found in 1Password): "
+read -s ADMINPASSWORD
+echo ""
 
 ##################
 ## MAIN CONTENT ##
@@ -36,9 +39,8 @@ echo "Press <return> once this Mac has been enrolled in Jamf:"
 read -n 1 -s
 
 # Create the Nozani Admin user and explicitly add SecureToken
-echo "Creating user..."
+echo "Creating Nozani Admin user..."
 echo $PASSWORD | sudo -S sysadminctl -addUser admin -password $ADMINPASSWORD -fullName "Nozani Admin" -admin
-sysadminctl -adminUser $USER -adminPassword $PASSWORD -secureTokenOn admin -password $ADMINPASSWORD
 
 # Assign variables to initialize computer name
 MODEL=`sysctl hw.model | sed 's/[0-9, ]//g' | cut -c 10-`
@@ -75,11 +77,9 @@ brew cask install google-chrome
 echo "Cleaning up..."
 echo $PASSWORD | sudo -S pwpolicy -a $USER -u $USER -setpolicy "newPasswordRequired=1"
 
-# Clear Bash history after running this script
-history -c
-
 # Check for updates and restart
 echo $PASSWORD | sudo -S softwareupdate -l -i -a
 echo "Script complete, restarting..."
 sleep 10
+history -c
 echo $PASSWORD | sudo -S shutdown -r now
