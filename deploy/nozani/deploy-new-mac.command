@@ -4,9 +4,7 @@
 ## DEPLOY NEW MAC SCRIPT ##
 ###########################
 
-################
-## INITIALIZE ##
-################
+# Initialization
 echo -e "Nozani macOS deploy script started...\n"
 USER=`id -u -n` # explicitly assign user regardless of login or access
 echo -n "Current User's Password: "
@@ -16,27 +14,14 @@ echo -n "Nozani Admin's Password (found in 1Password): "
 read -s ADMINPASSWORD
 echo ""
 
-##################
-## MAIN CONTENT ##
-##################
-
 # Install Command Line Tools (will require user input on pop-up window)
 echo "Initializing tools, please acknowledge pop-up windows..."
 xcode-select --install
 
 # Install Homebrew
-echo $PASSWORD | /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+echo $PASSWORD | /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" # TODO: fix script requiring password and requiring return key here. It's one or the other. Must fix to do both automatically.
 brew doctor
 brew tap caskroom/cask
-
-# Open Jamf Enrollment Page & Run DEP Enrollment Command (only one is necessary depending on how the device was purchased)
-open https://9ghcfm.jamfcloud.com
-echo $PASSWORD | sudo -S profiles renew -type enrollment
-echo -e "\nNOTE: Use the Open Enrollment webpage if macs were NOT bought from Apple or Best Buy. Otherwise, check Profiles under System Preferences to verify this Mac has been enrolled.\n"
-
-# Ensure the mac has been enrolled before proceeding
-echo "Press <return> once this Mac has been enrolled in Jamf:"
-read -n 1 -s
 
 # Create the Nozani Admin user and explicitly add SecureToken
 echo "Creating Nozani Admin user..."
@@ -50,9 +35,9 @@ SERIAL=`system_profiler SPHardwareDataType | awk '/Serial/ {print $4}' | cut -c 
 # Change computer name
 echo "Updating computer name..."
 COMPUTER_NAME=$MODEL$YEAR-$SERIAL
-echo $PASSWORD | sudo -S scutil --set ComputerName $COMPUTER_NAME && \
-echo $PASSWORD | sudo -S scutil --set HostName $COMPUTER_NAME && \
-echo $PASSWORD | sudo -S scutil --set LocalHostName $COMPUTER_NAME && \
+echo $PASSWORD | sudo -S scutil --set ComputerName $COMPUTER_NAME
+echo $PASSWORD | sudo -S scutil --set HostName $COMPUTER_NAME
+echo $PASSWORD | sudo -S scutil --set LocalHostName $COMPUTER_NAME
 echo $PASSWORD | sudo -S defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $COMPUTER_NAME
 dscacheutil -flushcache # flush the DNS cache for good measure
 
@@ -69,13 +54,14 @@ echo $PASSWORD | sudo -S /System/Library/CoreServices/RemoteManagement/ARDAgent.
 echo "Installing apps..."
 brew cask install google-chrome
 
-#############
-## CLEANUP ##
-#############
-
 # Force a password reset on the *current* user upon login
 echo "Cleaning up..."
 echo $PASSWORD | sudo -S pwpolicy -a $USER -u $USER -setpolicy "newPasswordRequired=1"
+
+# Open Jamf Enrollment Page & Run DEP Enrollment Command (only one is necessary depending on how the device was purchased)
+open https://9ghcfm.jamfcloud.com
+echo $PASSWORD | sudo -S profiles renew -type enrollment
+echo -e "\nNOTE: Use the Open Enrollment webpage if macs were NOT bought from Apple or Best Buy. Otherwise, check Profiles under System Preferences to verify this Mac has been enrolled.\n"
 
 # Check for updates and restart
 echo $PASSWORD | sudo -S softwareupdate -l -i -a
