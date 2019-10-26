@@ -83,6 +83,19 @@ brew cask install 1password
 brew cask install rocket-chat
 brew cask install gimp
 brew cask install nextcloud
+brew cask install anytrans
+brew cask install discord
+brew cask install ibackup-viewer
+brew cask install microsoft-word
+brew cask install microsoft-excel
+brew cask install microsoft-powerpoint
+brew cask install minecraft
+brew cask install mysqlworkbench
+brew cask install origin
+brew cask install battle-net
+brew cask install tor
+brew cask install virtualbox
+brew cask install nrlquaker-winbox
 
 
 #############
