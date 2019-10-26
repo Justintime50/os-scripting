@@ -22,7 +22,13 @@ brew install wget
 ####################################
 ## PACKAGE MANAGERS AND LANGUAGES ##
 # Install Composer for PHP package management
+brew install php # we'll use Brew's PHP and not the built in Mac PHP
 curl -sS https://getcomposer.org/installer | php
+echo $PASSWORD | sudo -S mv composer.phar /usr/local/bin/
+echo $PASSWORD | sudo -S chmod 755 /usr/local/bin/composer.phar
+echo 'alias composer="php /usr/local/bin/composer.phar"' >> ~/.zshrc
+source ~/.zshrc
+composer --version
 
 # Install Node package managers and Node
 brew install npm
