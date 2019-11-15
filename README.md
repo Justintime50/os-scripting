@@ -1,14 +1,12 @@
 # Mac Scripting
-This is a collection of macOS scripts that can be used to automate certain administrative tasks for a fleet of Macs.
+This is a collection of macOS scripts that can be used to automate deploying and administrating macOS devices.
 
 This project is intended to save IT professionals valuable hours, reduce user error, and provide consistency configuring macOS.
 
 ## Scripts
 
 ### Deployment Scripts
-The following are an all-inclusive script to deploy a machine, found in the `deploy` folder. All macOS deployments rely on `Homebrew`. Various GUI apps are installed via `Homebrew Cask`.
-- `deploy-new-mac.command` - deploys a new mac, installing the necessary software, setting up an admin user, changing computer name, enrolling the device in Jamf, forcing a password reset, etc.
-- `deploy-dev-mac.command` - deploys a mac intended for a software developer. Installs Command Line Tools, Homebrew, wget, npm, Yarn, Node, Python3 & PIP, Git, Docker, VS Code, and Chrome.
+The following are an all-inclusive script to deploy a machine, found in the `deploy` folder. Many of these are for companies I've worked with or personal machines.
 
 ### Legacy
 The `legacy` folder contains depricated scripts replaced elsewhere.
