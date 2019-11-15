@@ -69,4 +69,4 @@ read -n 1 -s
 echo "Shutting down..."
 sleep 5
 history -c
-echo $PASSWORD | sudo -S shutdown -r now
+echo $PASSWORD | sudo -S shutdown -h now

@@ -5,10 +5,8 @@
 ##################################
 
 { # Wrap script in error logging
-touch ~/add_user_script.log
+touch ~/deploy_mac_script.log
 
-####################
-## INITIALIZATION ##
 # Gather necessary input
 echo -n "Admin Password: "
 read -s PASSWORD
@@ -17,10 +15,8 @@ read -s PASSWORD
 xcode-select --install
 
 # Install Homebrew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+echo $PASSWORD | sudo -S curl -fsS 'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
 brew doctor
-brew tap caskroom/cask
-brew tap homebrew/cask-versions
 # brew cask install cakebrew # GUI app to manage Homebrew packages
 
 # Install wget
@@ -35,9 +31,6 @@ echo "[core]
 	name = Justintime50
 	email = justinpaulhammond@gmail.com" >> ~/.gitconfig
 
-
-####################################
-## PACKAGE MANAGERS AND LANGUAGES ##
 # Install PHP & Composer for PHP package management
 brew install php # we'll use Brew's PHP and not the built in Mac PHP
 curl -sS https://getcomposer.org/installer | php
@@ -63,11 +56,8 @@ echo $PASSWORD | sudo -S nano ~/.zshrc
 echo "alias python='python3'" >> ~/.zshrc
 echo "alias pip='pip3'" >> ~/.zshrc
 pip install beautifulsoup4
-# brew unlink python && brew link python # Used if linking does not work properly during install
 
-
-##########
-## APPS ##
+# Install apps
 brew cask install docker
 brew cask install visual-studio-code
 brew cask install google-chrome
@@ -97,20 +87,13 @@ brew cask install tor
 brew cask install virtualbox
 brew cask install nrlquaker-winbox
 
-
-#############
-## CLEANUP ##
-
-# Check for updates
-sudo softwareupdate -l -i -a
-echo -e "Script complete.\nPlease check error log (automatically opened) before restarting.\n\nPress <enter> to restart."
-read -n 1 -s
-
+# Check for updates and restart
+echo $PASSWORD | sudo -S softwareupdate -l -i -a
 } 2> ~/add_user_script.log # End error logging wrapper
 open ~/add_user_script.log # Open the log and have the user check for errors before finishing
-
-# Restart the machine
-echo "Restarting..."
-sleep 10
+echo -e "Script complete.\nPlease check error log (automatically opened) before restarting.\n\nPress <enter> to restart."
+read -n 1 -s
+echo "Shutting down..."
+sleep 5
 history -c
-echo $PASSWORD | sudo -S shutdown -r now
+echo $PASSWORD | sudo -S shutdown -h now
