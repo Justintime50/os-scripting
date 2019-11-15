@@ -49,3 +49,6 @@ Once FileVault is enabled, the user will need to punch in their password upon re
 
 ### "setpolicy" terminal command
 This terminal command is [supposedly depricated](https://www.jamf.com/jamf-nation/discussions/25933/using-pwpolicy-to-require-an-immediate-password-reset) and may be replaced or done away with in coming macOS updates.
+
+### DEP Prompt Not Showing
+If you can't get a DEP prompt and it is enrolled, typically the battery died completely and it's running off default 1976 time. Boot into recovery mode and run `sntp -sS time.apple.com` to set the current time (requires internet connection).

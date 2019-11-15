@@ -8,7 +8,7 @@
 touch ~/add_user_script.log
 
 # Check that the EPENROLL volume is mounted and named properly, otherwise installing apps won't work
-if mount | grep /Volumes/EPENROLL > /dev/null; then
+if ls /volumes | grep EPENROLL > /dev/null; then
   echo "Starting EP Add User Script..."
 else
   echo "The EPENROLL volume (USB) is not mounted or named properly. Please fix this before proceeding."
@@ -26,11 +26,11 @@ fi
 # === Typically, this is all the info the tech needs to enter ===
 USERINFO="N"
 while ! [[ $USERINFO = "Y" || $USERINFO = "y" ]] ; do
-  echo "Enter Admin password"
+  echo "Enter epadmin password"
   read -s ADMINPASS  
 
-  echo "Enter your desired user name: "  
-  read USERNAME
+  echo "Enter the desired username for the new account: "  
+  read NEWUSERNAME
 
   echo "Enter a full name for this user: "
   read FULLNAME
@@ -38,11 +38,11 @@ while ! [[ $USERINFO = "Y" || $USERINFO = "y" ]] ; do
   echo "Enter a password for this user: "
   read PASSWORD
 
-  echo "FullName: $FULLNAME"
-  echo "Username: $USERNAME"
+  echo "Full Name: $FULLNAME"
+  echo "Username: $NEWUSERNAME"
   echo "Password Entered: $PASSWORD"
 
-  if [[ -z "${USERNAME// }" ]] ; then
+  if [[ -z "${NEWUSERNAME// }" ]] ; then
     echo "Username cannot be blank"
   else
     echo "Is this info correct? y/N"
@@ -50,13 +50,17 @@ while ! [[ $USERINFO = "Y" || $USERINFO = "y" ]] ; do
   fi
 done
 
+# Check epadmin password to make sure it's valid before proceeding
+echo $ADMINPASS | sudo -S echo "Testing password match..." || { echo 'The epadmin password you provided does not match, please restart the script with the correct password.'; exit 1; }
+echo "epadmin password matched"
+
 # Setup user groups
 echo "Is this an administrative user? (y/N)"
 read GROUP_ADD
 case $GROUP_ADD in
   y|Y ) echo "yes";;
   n|N ) echo "no";;
-  * ) echo "y or n (Boolean) input required";; # TODO: This doesn't repeat the prompt if the user clicks something other than y or n
+  * ) echo "y or n (Boolean) input required";; # TODO: This doesn't repeat the prompt if the user clicks something other than y or n, it actually just continues
 esac
 
 if [[ $GROUP_ADD = "n" || $GROUP_ADD = "N" ]] ; then
@@ -73,14 +77,13 @@ read ASSETCHOICE
 case $ASSETCHOICE in
   y|Y ) echo "yes";;
   n|N ) echo "no";;
-  * ) echo "y or n (Boolean) input required";; # TODO: This doesn't repeat the prompt if the user clicks something other than y or n
+  * ) echo "y or n (Boolean) input required";; # TODO: This doesn't repeat the prompt if the user clicks something other than y or n, it actually just continues
 esac
 
 if [[ $ASSETCHOICE = "n" || $ASSETCHOICE = "N" ]] ; then 
   echo "Downloading Assets..."
   curl -s https://easypost-infotech-files.s3.amazonaws.com/default_install/MerakiSM-Agent-easypost-corp-mdm.pkg >/volumes/EPENROLL/MerakiSM-Agent-easypost-corp-mdm.pkg
   curl -s https://easypost-infotech-files.s3.amazonaws.com/default_install/Brother_PrinterDrivers_ColorLaser.pkg >/volumes/EPENROLL/Brother_PrinterDrivers_ColorLaser.pkg
-  curl -s https://easypost-infotech-files.s3.amazonaws.com/default_install/Backup%20and%20Sync%20from%20Google.zip >/volumes/EPENROLL/Backup%20and%20Sync%20from%20Google.zip
   curl -s https://easypost-infotech-files.s3.amazonaws.com/default_install/RingCentral%20Phone.zip >/volumes/EPENROLL/RingCentral%20Phone.zip
   curl -s https://easypost-infotech-files.s3.amazonaws.com/default_install/Slack.zip >/volumes/EPENROLL/Slack.zip
 else [[ $ASSETCHOICE = "y" || $ASSETCHOICE = "Y" ]] #; then
@@ -93,7 +96,7 @@ read MERAKICHOICE
 case "$MERAKICHOICE" in
   y|Y ) echo "yes";;
   n|N ) echo "no";;
-  * ) echo "y or n (Boolean) input required";; # TODO: This doesn't repeat the prompt if the user clicks something other than y or n
+  * ) echo "y or n (Boolean) input required";; # TODO: This doesn't repeat the prompt if the user clicks something other than y or n, it actually just continues
 esac
 
 if [[ $MERAKICHOICE = "n" || $MERAKICHOICE = "N" ]] ; then
@@ -105,62 +108,72 @@ else [[ $MERAKICHOICE = "y" || $MERAKICHOICE = "Y" ]] #; then
   break
 fi
 
+# Install Brother printer drivers
 echo "Installing Brother Printer Drivers"
 echo $ADMINPASS | sudo -S installer -pkg /volumes/EPENROLL/Brother_PrinterDrivers_ColorLaser.pkg -target / ; echo "Brother Drivers installed"
 
+# Create user account
 echo "Creating User Account"
 export HISTIGNORE='*sudo -S*'
-echo $ADMINPASS | sudo -S sysadminctl -adminUser epadmin -adminPassword $ADMINPASS -addUser $USERNAME -fullName $FULLNAME -password $PASSWORD
+echo $ADMINPASS | sudo -S sysadminctl -adminUser epadmin -adminPassword $ADMINPASS -addUser "$NEWUSERNAME" -fullName "$FULLNAME" -password $PASSWORD
 
  # Add user to any specified groups
 echo "Adding user to specified groups..."
 for GROUP in $SECONDARY_GROUPS ; do
-  echo $ADMINPASS | sudo -S dseditgroup -o edit -t user -a $USERNAME $GROUP
+  echo $ADMINPASS | sudo -S dseditgroup -o edit -t user -a $NEWUSERNAME $GROUP
 done
 
-# User Creation Finished!
-echo "Created user #$USERID: $USERNAME ($FULLNAME)"
+# User Creation Finished
+echo "Created user #$USERID: $NEWUSERNAME ($FULLNAME)"
 
 # Copy Viscosity default prefs + Dock Default Prefs
 echo "Copying Viscosity preferences"
-echo $ADMINPASS | sudo -S cp /volumes/EPENROLL/xml/com.viscosityvpn.Viscosity.plist /Users/$USERNAME/Library/Preferences/
-echo $ADMINPASS | sudo -S cp /volumes/EPENROLL/xml/com.apple.dock.plist /Users/$USERNAME/Library/Preferences
-echo $ADMINPASS | sudo -S chown $USERNAME /Users/$USERNAME/Library/Preferences/com.viscosityvpn.Viscosity.plist
+echo $ADMINPASS | sudo -S cp /volumes/EPENROLL/xml/com.viscosityvpn.Viscosity.plist /Users/$NEWUSERNAME/Library/Preferences/
+echo $ADMINPASS | sudo -S cp /volumes/EPENROLL/xml/com.apple.dock.plist /Users/$NEWUSERNAME/Library/Preferences
+echo $ADMINPASS | sudo -S chown $NEWUSERNAME /Users/$NEWUSERNAME/Library/Preferences/com.viscosityvpn.Viscosity.plist
 
 # Install Dockutil
 echo $ADMINPASS | sudo -S cp /volumes/EPENROLL/xml/dockutil /usr/local/sbin/
 
 # Updating MacOS
-echo "Updating MacOS"
+echo "Updating macOS"
 echo $ADMINPASS | sudo -S softwareupdate -l -ir
 
 # Install Chrome
 echo "Downloading Chrome"
 tmpfile=$temp/chrome.dmg
 curl -L https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg > $tmpfile
-
 yes | hdiutil attach -noverify -nobrowse -mountpoint $temp/mount $tmpfile
 echo $ADMINPASS | sudo -S cp -r $temp/mount/*.app /Applications
 hdiutil detach $temp/mount
 echo $ADMINPASS | sudo -S rm -r $tmpfile
+sleep 8
 open -a Google\ Chrome # We auto-launch Chrome so auto-updates can be initiated.
+sleep 10
+killall "Google Chrome" 
+sleep 7
+open -a Google\ Chrome
 echo "Chrome Installed. Please verify automatic updates are enabled." 
 
 # Copy Slack into Apps folder
-echo $ADMINPASS | sudo -S mkdir /Users/$USERNAME/Applications
-echo $ADMINPASS | sudo -S unzip -d /Users/$USERNAME/Applications/ /volumes/EPENROLL/Slack.zip 
-echo $ADMINPASS | sudo -S chmod -R 755 /Users/$USERNAME/Applications
+echo $ADMINPASS | sudo -S mkdir /Users/$NEWUSERNAME/Applications
+echo $ADMINPASS | sudo -S unzip -d /Users/$NEWUSERNAME/Applications/ /volumes/EPENROLL/Slack.zip 
+echo $ADMINPASS | sudo -S chmod -R 755 /Users/$NEWUSERNAME/Applications
 echo "Slack installed"
 
 # Copy RingCentral into Apps folder
-echo $ADMINPASS | sudo -S unzip -d /Users/$USERNAME/Applications /volumes/EPENROLL/RingCentral%20Phone.zip
+echo $ADMINPASS | sudo -S unzip -d /Users/$NEWUSERNAME/Applications /volumes/EPENROLL/RingCentral%20Phone.zip
 echo "RingCentral Phone installed"
+
+# Modify the new user's dock
 echo "Modifying Dock"
-echo $ADMINPASS | sudo -S /usr/local/sbin/dockutil --add '/Users/$USERNAME/Applications/Slack.app' '/Users/$USERNAME' --no-restart
-echo $ADMINPASS | sudo -S /usr/local/sbin/dockutil --remove 'Maps' '/Users/$USERNAME/' --no-restart
-echo $ADMINPASS | sudo -S /usr/local/sbin/dockutil --remove 'Photos' '/Users/$USERNAME/' --no-restart
-echo $ADMINPASS | sudo -S /usr/local/sbin/dockutil --add '~/Downloads' --view grid --display folder '/Users/$USERNAME/' --no-restart
-echo $ADMINPASS | sudo -S chown -R $USERNAME /Users/$USERNAME/Applications
+echo $ADMINPASS | sudo -S /usr/local/sbin/dockutil --remove 'Maps' /Users/$NEWUSERNAME --no-restart
+echo $ADMINPASS | sudo -S /usr/local/sbin/dockutil --remove 'Photos' /Users/$NEWUSERNAME --no-restart
+echo $ADMINPASS | sudo -S /usr/local/sbin/dockutil --remove 'Podcasts' /Users/$NEWUSERNAME --no-restart
+echo $ADMINPASS | sudo -S /usr/local/sbin/dockutil --remove 'TV' /Users/$NEWUSERNAME --no-restart
+echo $ADMINPASS | sudo -S /usr/local/sbin/dockutil --add /Users/$NEWUSERNAME/Applications/Slack.app /Users/$NEWUSERNAME --no-restart # TODO: Fix this
+echo $ADMINPASS | sudo -S /usr/local/sbin/dockutil --add '~/Downloads' --view grid --display folder /Users/$NEWUSERNAME --no-restart # TODO: Fix this
+echo $ADMINPASS | sudo -S chown -R $NEWUSERNAME /Users/$NEWUSERNAME/Applications
 
 # Install Viscosity
 echo "Downloading Viscosity"
@@ -170,11 +183,17 @@ yes | hdiutil attach -noverify -nobrowse -mountpoint $temp/mount $tmpfile
 echo $ADMINPASS | sudo -S cp -r $temp/mount/*.app /Applications
 hdiutil detach $temp/mount
 echo $ADMINPASS | sudo -S rm -r $tmpfile
+sleep 5 # Sometimes Viscosity opens too quickly so we'll wait here
+open -a Viscosity # We open Viscosity to click through the prompt for the helper tool installer
 echo "Viscosity Installed" 
 
 # Install Google Backup & Sync
 echo "Installing Backup & Sync"
-echo $ADMINPASS | sudo -S unzip -d /Applications /volumes/EPENROLL/Backup%20and%20Sync%20from%20Google.zip
+curl -L https://meraki-na.s3.amazonaws.com/pcc/enterprise-apps/e0357daef51c533241d0b7603516e0ae/be2251996032c72c5b5c848de8287e4f.dmg >$tmpfile
+yes | hdiutil attach -noverify -nobrowse -mountpoint $temp/mount $tmpfile
+echo $ADMINPASS | sudo -S cp -r $temp/mount/*.app /Applications
+hdiutil detach $temp/mount
+echo $ADMINPASS | sudo -S rm -r $tmpfile
 echo "Backup & Sync installed"
 
 # Install 1Password
@@ -203,29 +222,30 @@ echo $ADMINPASS | sudo -S /usr/bin/defaults write /Library/Preferences/com.apple
 echo $ADMINPASS | sudo -S /usr/bin/defaults write /private/var/db/timed/Library/Preferences/com.apple.timed.plist TMAutomaticTimeOnlyEnabled -bool YES
 echo $ADMINPASS | sudo -S /usr/bin/defaults write /private/var/db/timed/Library/Preferences/com.apple.timed.plist TMAutomaticTimeZoneEnabled -bool YES
 
+# Sync FileVault with APFS
 echo "Syncing FileVault with APFS"
 echo $ADMINPASS | sudo -S diskutil apfs updatePreboot /
 
 # Change Computer Name
 echo "Changing computer name..."
-COMPUTERNAME=$FULLNAME # TODO: This is broken and isn't sending through strings
-echo $ADMINPASS | sudo -S scutil --set ComputerName $COMPUTERNAME
-echo $ADMINPASS | sudo -S scutil --set HostName $COMPUTERNAME
-echo $ADMINPASS | sudo -S scutil --set LocalHostName $COMPUTERNAME
+COMPUTERNAME="$FULLNAME"
+echo $ADMINPASS | sudo -S scutil --set ComputerName "$COMPUTERNAME"
+echo $ADMINPASS | sudo -S scutil --set HostName "$COMPUTERNAME"
+echo $ADMINPASS | sudo -S scutil --set LocalHostName "$COMPUTERNAME"
 dscacheutil -flushcache
 
 # Set password reset
 echo "Setting password to require change..."
-echo $ADMINPASS | sudo -S pwpolicy -u $USERNAME setpolicy newPasswordRequired=1
+echo $ADMINPASS | sudo -S pwpolicy -u $NEWUSERNAME setpolicy newPasswordRequired=1
 
 } 2> ~/add_user_script.log # End error logging wrapper
 open ~/add_user_script.log # Open the log and have the user check for errors before finishing
 
-echo -e "Script complete.\nPlease check error log (automatically opened) before restarting.\n\nPress <enter> to restart."
+echo -e "Script complete.\nPlease check error log (automatically opened) before restarting.\n\nPress <enter> to shutdown and update."
 read -n 1 -s
 
 # Restart the machine
-echo "Restarting..."
-sleep 10
+echo "Shutting down..."
+sleep 5
 history -c
-echo $ADMINPASS | sudo -S shutdown -r now
+echo $ADMINPASS | sudo -S shutdown -h now # We shutdown instead of restart so software updates can be applied properly via CLI

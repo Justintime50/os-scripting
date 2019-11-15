@@ -10,10 +10,8 @@
 xcode-select --install
 
 # Install Homebrew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+curl -fsS 'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
 brew doctor
-brew tap caskroom/cask
-brew tap homebrew/cask-versions
 # brew cask install cakebrew # GUI app to manage Homebrew packages
 
 # Install wget

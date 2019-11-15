@@ -5,12 +5,12 @@
 ###########################
 
 # Initialization
-echo -e "Nozani macOS deploy script started...\n"
+echo -e "Buy Box Experts macOS deploy script started...\n"
 USER=`id -u -n` # explicitly assign user regardless of login or access
 echo -n "Current User's Password: "
 read -s PASSWORD
 echo ""
-echo -n "Nozani Admin's Password (found in 1Password): "
+echo -n "Buy Box Experts Admin's Password (found in 1Password): "
 read -s ADMINPASSWORD
 echo ""
 
@@ -19,13 +19,12 @@ echo "Initializing tools, please acknowledge pop-up windows..."
 xcode-select --install
 
 # Install Homebrew
-echo $PASSWORD | /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" # TODO: fix script requiring password and requiring return key here. It's one or the other. Must fix to do both automatically.
+echo $PASSWORD | sudo -S curl -fsS 'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
 brew doctor
-brew tap caskroom/cask
 
-# Create the Nozani Admin user and explicitly add SecureToken
-echo "Creating Nozani Admin user..."
-echo $PASSWORD | sudo -S sysadminctl -addUser admin -password $ADMINPASSWORD -fullName "Nozani Admin" -admin
+# Create the Buy Box Experts Admin user and explicitly add SecureToken
+echo "Creating Buy Box Experts Admin user..."
+echo $PASSWORD | sudo -S sysadminctl -addUser admin -password $ADMINPASSWORD -fullName "Buy Box Experts Admin" -admin
 
 # Assign variables to initialize computer name
 MODEL=`sysctl hw.model | sed 's/[0-9, ]//g' | cut -c 10-`
@@ -61,11 +60,13 @@ echo $PASSWORD | sudo -S pwpolicy -a $USER -u $USER -setpolicy "newPasswordRequi
 # Open Jamf Enrollment Page & Run DEP Enrollment Command (only one is necessary depending on how the device was purchased)
 open https://9ghcfm.jamfcloud.com
 echo $PASSWORD | sudo -S profiles renew -type enrollment
-echo -e "\nNOTE: Use the Open Enrollment webpage if macs were NOT bought from Apple or Best Buy. Otherwise, check Profiles under System Preferences to verify this Mac has been enrolled.\n"
+echo -e "\nNOTE: Use the Open Enrollment webpage if macs were NOT bought directly from our DEP Authorized Supplier. Otherwise, check Profiles under System Preferences to verify this Mac has been enrolled.\n"
 
 # Check for updates and restart
 echo $PASSWORD | sudo -S softwareupdate -l -i -a
-echo "Script complete, restarting..."
-sleep 10
+echo -e "Script complete.\nPlease check for errors and ensure this Mac is enrolled before proceeding.\n\nPress <enter> to shutdown and update."
+read -n 1 -s
+echo "Shutting down..."
+sleep 5
 history -c
 echo $PASSWORD | sudo -S shutdown -r now
