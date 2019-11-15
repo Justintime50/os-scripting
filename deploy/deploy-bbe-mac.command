@@ -5,12 +5,12 @@
 ###########################
 
 # Initialization
-echo -e "Buy Box Experts macOS deploy script started...\n"
+echo -e "BBE macOS deployment script started...\n"
 USER=`id -u -n` # explicitly assign user regardless of login or access
 echo -n "Current User's Password: "
 read -s PASSWORD
 echo ""
-echo -n "Buy Box Experts Admin's Password (found in 1Password): "
+echo -n "BBE Admin Password (found in 1Password): "
 read -s ADMINPASSWORD
 echo ""
 
@@ -22,9 +22,9 @@ xcode-select --install
 echo $PASSWORD | sudo -S curl -fsS 'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
 brew doctor
 
-# Create the Buy Box Experts Admin user and explicitly add SecureToken
-echo "Creating Buy Box Experts Admin user..."
-echo $PASSWORD | sudo -S sysadminctl -addUser admin -password $ADMINPASSWORD -fullName "Buy Box Experts Admin" -admin
+# Create the BBE Admin user and explicitly add SecureToken
+echo "Creating BBE Admin user..."
+echo $PASSWORD | sudo -S sysadminctl -addUser admin -password $ADMINPASSWORD -fullName "BBE Admin" -admin
 
 # Assign variables to initialize computer name
 MODEL=`sysctl hw.model | sed 's/[0-9, ]//g' | cut -c 10-`
