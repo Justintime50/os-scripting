@@ -5,7 +5,6 @@
 ##################################
 
 { # Wrap script in error logging
-touch ~/deploy_mac_script.log
 
 # Gather necessary input
 echo -n "Admin Password: "
@@ -88,7 +87,7 @@ brew cask install virtualbox
 brew cask install nrlquaker-winbox
 
 # Check for updates and restart
-echo "$PASSWORD" | sudo -S softwareupdate -l -i -a
+echo "$PASSWORD" | sudo -S softwareupdate -i -a
 } 2> ~/add_user_script.log # End error logging wrapper
 open ~/add_user_script.log # Open the log and have the user check for errors before finishing
 echo -e "Script complete.\nPlease check error log (automatically opened) before restarting.\n\nPress <enter> to restart."

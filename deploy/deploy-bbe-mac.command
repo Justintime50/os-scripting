@@ -63,7 +63,7 @@ echo "$PASSWORD" | sudo -S profiles renew -type enrollment
 echo -e "\nNOTE: Use the Open Enrollment webpage if macs were NOT bought directly from our DEP Authorized Supplier. Otherwise, check Profiles under System Preferences to verify this Mac has been enrolled.\n"
 
 # Check for updates and restart
-echo "$PASSWORD" | sudo -S softwareupdate -l -i -a
+echo "$PASSWORD" | sudo -S softwareupdate -i -a
 echo -e "Script complete.\nPlease check for errors and ensure this Mac is enrolled before proceeding.\n\nPress <enter> to shutdown and update."
 read -rn 1
 echo "Shutting down..."
