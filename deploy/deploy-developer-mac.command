@@ -15,8 +15,8 @@ brew doctor
 # Install Composer for PHP package management
 brew install php # we'll use Brew's PHP and not the built in Mac PHP
 curl -sS https://getcomposer.org/installer | php
-echo $PASSWORD | sudo -S mv composer.phar /usr/local/bin/
-echo $PASSWORD | sudo -S chmod 755 /usr/local/bin/composer.phar
+echo "$PASSWORD" | sudo -S mv composer.phar /usr/local/bin/
+echo "$PASSWORD" | sudo -S chmod 755 /usr/local/bin/composer.phar
 echo 'alias composer="php /usr/local/bin/composer.phar"' >> ~/.zshrc
 source ~/.zshrc
 composer --version
@@ -35,4 +35,4 @@ brew cask install google-chrome
 history -c
 
 # Check for updates
-sudo softwareupdate -l -i -a
+sudo softwareupdate -i -a
