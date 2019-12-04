@@ -18,9 +18,6 @@ echo "$PASSWORD" | sudo -S curl -fsS 'https://raw.githubusercontent.com/Homebrew
 brew doctor
 # brew cask install cakebrew # GUI app to manage Homebrew packages
 
-# Install wget
-brew install wget
-
 # Install Git
 brew install git
 # Configure git config file
@@ -37,7 +34,6 @@ echo "$PASSWORD" | sudo -S mv composer.phar /usr/local/bin/
 echo "$PASSWORD" | sudo -S chmod 755 /usr/local/bin/composer.phar
 echo 'alias composer="php /usr/local/bin/composer.phar"' >> ~/.zshrc
 source ~/.zshrc
-composer --version
 
 # Install Laravel Globally
 composer global require laravel/installer
@@ -47,10 +43,10 @@ source ~/.zshrc
 # Install Node package managers and Node
 brew install npm
 brew install yarn
-brew install node
+# brew install node # Already installed as an npm dependency
 
 # Install Python3, PIP, and packages
-brew install python3
+# brew install python3 # Already installed as a PHP dependency
 echo "$PASSWORD" | sudo -S nano ~/.zshrc
 echo "alias python='python3'" >> ~/.zshrc
 echo "alias pip='pip3'" >> ~/.zshrc
@@ -58,6 +54,7 @@ pip install beautifulsoup4
 
 # Install apps
 brew cask install docker
+brew cask install kitematic
 brew cask install visual-studio-code
 brew cask install google-chrome
 brew cask install firefox
@@ -65,7 +62,6 @@ brew cask install teamviewer
 brew cask install slack
 brew cask install ccleaner
 brew cask install funter
-brew cask install filezilla
 brew cask install mamp
 brew cask install steam
 brew cask install 1password
@@ -82,9 +78,11 @@ brew cask install minecraft
 brew cask install mysqlworkbench
 brew cask install origin
 brew cask install battle-net
-brew cask install tor
-brew cask install virtualbox
+brew cask install tor-browser
 brew cask install nrlquaker-winbox
+brew cask install aerial
+brew cask install postman
+brew cask install virtualbox # Troubled installer, requires password and permissions on Catalina
 
 # Check for updates and restart
 echo "$PASSWORD" | sudo -S softwareupdate -i -a
