@@ -24,7 +24,6 @@ composer --version
 # Install other items
 brew install npm
 brew install yarn
-brew install node
 brew install python3
 brew install git
 brew cask install docker

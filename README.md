@@ -6,13 +6,13 @@ This project is intended to save IT professionals valuable hours, reduce user er
 ## Scripts
 
 ### Deployment Scripts
-The following are an all-inclusive script to deploy a machine, found in the `deploy` folder. Many of these are for companies I've worked with or personal machines.
+The following are an all-inclusive script to deploy a machine, found in the `deploy` folder. Many of these are for companies I've worked with or personal use.
 
 ### Legacy
 The `legacy` folder contains depricated scripts replaced elsewhere.
 
 ### Single Commands
-See the Single Commands [README](/single-commands.md).
+See the Single Commands [README](/single-commands.md) for info on useful terminal commands.
 
 ### Troubleshooting
 The following scripts can be used to troubleshoot macOS
@@ -49,4 +49,4 @@ Once FileVault is enabled, the user will need to punch in their password upon re
 This terminal command is [supposedly depricated](https://www.jamf.com/jamf-nation/discussions/25933/using-pwpolicy-to-require-an-immediate-password-reset) and may be replaced or done away with in coming macOS updates.
 
 ### DEP Prompt Not Showing
-If you can't get a DEP prompt and it is enrolled, typically the battery died completely and it's running off default 1976 time. Boot into recovery mode and run `sntp -sS time.apple.com` to set the current time (requires internet connection).
+If you can't get a DEP prompt and it is enrolled, typically the battery died completely and it's running off default 1970 time. Boot into recovery mode and run `sntp -sS time.apple.com` to set the current time (requires internet connection).
