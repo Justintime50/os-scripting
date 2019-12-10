@@ -16,7 +16,6 @@ xcode-select --install
 # Install Homebrew
 echo "$PASSWORD" | sudo -S curl -fsS 'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
 brew doctor
-# brew cask install cakebrew # GUI app to manage Homebrew packages
 
 # Install Git
 brew install git
@@ -30,15 +29,14 @@ echo "[core]
 # Install PHP & Composer for PHP package management
 brew install php # we'll use Brew's PHP and not the built in Mac PHP
 curl -sS https://getcomposer.org/installer | php
+echo "$PASSWORD" | sudo -S mv composer.phar composer
 echo "$PASSWORD" | sudo -S mv composer.phar /usr/local/bin/
-echo "$PASSWORD" | sudo -S chmod 755 /usr/local/bin/composer.phar
-echo 'alias composer="php /usr/local/bin/composer.phar"' >> ~/.zshrc
-source ~/.zshrc
+echo "$PASSWORD" | sudo -S chmod 755 /usr/local/bin/composer
+echo 'alias composer="php /usr/local/bin/composer"' >> ~/.zshrc
 
 # Install Laravel Globally
 composer global require laravel/installer
 echo "export PATH='$HOME/.composer/vendor/bin:$PATH'" >> ~/.zshrc
-source ~/.zshrc
 
 # Install Node package managers and Node
 brew install npm
@@ -47,10 +45,12 @@ brew install yarn
 
 # Install Python3, PIP, and packages
 # brew install python3 # Already installed as a PHP dependency
-echo "$PASSWORD" | sudo -S nano ~/.zshrc
 echo "alias python='python3'" >> ~/.zshrc
 echo "alias pip='pip3'" >> ~/.zshrc
 pip install beautifulsoup4
+
+# Source all the changes we've made
+source ~/.zshrc
 
 # Install apps
 brew cask install docker
