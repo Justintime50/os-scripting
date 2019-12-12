@@ -1,5 +1,7 @@
+#!/bin/bash
+
 # Navigate to downloads
-cd Downloads
+cd Downloads || exit
 
 # Download Chrome
 wget https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg

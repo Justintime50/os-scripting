@@ -4,6 +4,6 @@
 
 rm /volumes/Macintosh\ HD/var/db/.AppleSetupDone 
 rm /volumes/Macintosh\ HD/var/db/ConfigurationProfiles/Store/Conf* 
-cd /volumes/Macintosh\ HD/var/db/ConfigurationProfiles/Settings/ 
+cd /volumes/Macintosh\ HD/var/db/ConfigurationProfiles/Settings/ || exit
 rm -rf .[^.]* 
 shutdown -r now
