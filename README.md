@@ -1,4 +1,6 @@
 # Mac Scripting
+[![Build Status](https://travis-ci.org/Justintime50/mac-scripting.svg?branch=master)](https://travis-ci.org/Justintime50/mac-scripting)
+[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 This is a collection of macOS scripts that can be used to automate deploying and administrating macOS devices.
 
 This project is intended to save IT professionals valuable hours, reduce user error, and provide consistency configuring macOS.
@@ -28,6 +30,9 @@ When creating a new script, make sure to save the file as a script file `.sh` or
 If a script ends in `.command` the file can simply be double clicked.
 
 If a script ends in `.sh`, drag it into the terminal or navigate to the directory it's housed in and run `./script-name.sh` and hit enter.
+
+## Testing
+This project is tested with [SpellCheck](https://github.com/koalaman/shellcheck) via [Travis CI](https://travis-ci.org/Justintime50/mac-scripting).
 
 ## Gotchas
 
