@@ -1,6 +1,7 @@
 # Mac Scripting
 [![Build Status](https://travis-ci.org/Justintime50/mac-scripting.svg?branch=master)](https://travis-ci.org/Justintime50/mac-scripting)
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
+
 This is a collection of macOS scripts that can be used to automate deploying and administrating macOS devices.
 
 This project is intended to save IT professionals valuable hours, reduce user error, and provide consistency configuring macOS.
