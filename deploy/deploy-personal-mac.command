@@ -50,6 +50,7 @@ echo "alias pip='pip3'" >> ~/.zshrc
 pip install beautifulsoup4
 
 # Source all the changes we've made
+# shellcheck source=/dev/null
 source ~/.zshrc
 
 # Install apps

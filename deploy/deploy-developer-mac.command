@@ -18,6 +18,7 @@ curl -sS https://getcomposer.org/installer | php
 echo "$PASSWORD" | sudo -S mv composer.phar /usr/local/bin/
 echo "$PASSWORD" | sudo -S chmod 755 /usr/local/bin/composer.phar
 echo 'alias composer="php /usr/local/bin/composer.phar"' >> ~/.zshrc
+# shellcheck source=/dev/null
 source ~/.zshrc
 composer --version
 

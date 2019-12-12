@@ -32,7 +32,7 @@ If a script ends in `.command` the file can simply be double clicked.
 If a script ends in `.sh`, drag it into the terminal or navigate to the directory it's housed in and run `./script-name.sh` and hit enter.
 
 ## Testing
-This project is tested with [SpellCheck](https://github.com/koalaman/shellcheck) via [Travis CI](https://travis-ci.org/Justintime50/mac-scripting).
+This project is tested with [ShellCheck](https://github.com/koalaman/shellcheck) via [Travis CI](https://travis-ci.org/Justintime50/mac-scripting).
 
 ## Gotchas
 
