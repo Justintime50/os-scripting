@@ -7,12 +7,8 @@
 { # Wrap script in error logging
 
 # Check that the EPENROLL volume is mounted and named properly, otherwise installing apps won't work
-if ls /volumes | grep EPENROLL > /dev/null; then # TODO: Don't ls | grep this as it's bad practice and this doesn't explicitly check if the volume is name EPENROLL, only as long as it contains that value. It could be "EPENROLL1" and still pass.
-  echo "Starting EP Add User Script..."
-else
-  echo "The EPENROLL volume (USB) is not mounted or named properly. Please fix this before proceeding."
-  exit 1
-fi
+cd /volumes/EPENROLL || echo "The EPENROLL volume (USB) is not mounted or named properly. Please fix this before proceeding."
+echo "Starting EP Add User Script..."
 
 # Check to make sure that filevault is already started.
 EXPECTEDFILEVAULTSTATUS="FileVault is On."
@@ -26,7 +22,7 @@ fi
 USERINFO="N"
 while ! [[ $USERINFO = "Y" || $USERINFO = "y" ]] ; do
   echo "Enter epadmin password"
-  read -sr ADMINPASS  
+  read -sr ADMINPASS
 
   echo "Enter the desired username for the new account: "  
   read -r NEWUSERNAME
@@ -81,10 +77,10 @@ esac
 
 if [[ $ASSETCHOICE = "n" || $ASSETCHOICE = "N" ]] ; then 
   echo "Downloading Assets..."
-  curl -s https://easypost-infotech-files.s3.amazonaws.com/default_install/MerakiSM-Agent-easypost-corp-mdm.pkg >/volumes/EPENROLL/MerakiSM-Agent-easypost-corp-mdm.pkg
-  curl -s https://easypost-infotech-files.s3.amazonaws.com/default_install/Brother_PrinterDrivers_ColorLaser.pkg >/volumes/EPENROLL/Brother_PrinterDrivers_ColorLaser.pkg
-  curl -s https://easypost-infotech-files.s3.amazonaws.com/default_install/RingCentral%20Phone.zip >/volumes/EPENROLL/RingCentral%20Phone.zip
-  curl -s https://easypost-infotech-files.s3.amazonaws.com/default_install/Slack.zip >/volumes/EPENROLL/Slack.zip
+  curl -s https://easypost-infotech-files.s3.amazonaws.com/default_install/MerakiSM-Agent-easypost-corp-mdm.pkg >MerakiSM-Agent-easypost-corp-mdm.pkg
+  curl -s https://easypost-infotech-files.s3.amazonaws.com/default_install/Brother_PrinterDrivers_ColorLaser.pkg >Brother_PrinterDrivers_ColorLaser.pkg
+  curl -s https://easypost-infotech-files.s3.amazonaws.com/default_install/RingCentral%20Phone.zip >RingCentral%20Phone.zip
+  curl -s https://easypost-infotech-files.s3.amazonaws.com/default_install/Slack.zip >Slack.zip
 else [[ $ASSETCHOICE = "y" || $ASSETCHOICE = "Y" ]] #; then
   echo "Assets downloaded, continuing..."
 fi
@@ -103,12 +99,12 @@ if [[ $MERAKICHOICE = "n" || $MERAKICHOICE = "N" ]] ; then
   echo "Enabling Location services"
   echo "$ADMINPASS" | sudo -S /usr/bin/defaults -currentHost write com.apple.locationd LocationServicesEnabled -int 1
 else [[ $MERAKICHOICE = "y" || $MERAKICHOICE = "Y" ]] #; then
-  echo "$ADMINPASS" | sudo -S installer -pkg /volumes/EPENROLL/MerakiSM-Agent-easypost-corp-mdm.pkg -target / ; echo "Meraki Agent installed"            
+  echo "$ADMINPASS" | sudo -S installer -pkg MerakiSM-Agent-easypost-corp-mdm.pkg -target / ; echo "Meraki Agent installed"            
 fi
 
 # Install Brother printer drivers
 echo "Installing Brother Printer Drivers"
-echo "$ADMINPASS" | sudo -S installer -pkg /volumes/EPENROLL/Brother_PrinterDrivers_ColorLaser.pkg -target / ; echo "Brother Drivers installed"
+echo "$ADMINPASS" | sudo -S installer -pkg Brother_PrinterDrivers_ColorLaser.pkg -target / ; echo "Brother Drivers installed"
 
 # Create user account
 echo "Creating User Account"
@@ -126,12 +122,12 @@ echo "Created user #$USERID: $NEWUSERNAME ($FULLNAME)"
 
 # Copy Viscosity default prefs + Dock Default Prefs
 echo "Copying Viscosity preferences"
-echo "$ADMINPASS" | sudo -S cp /volumes/EPENROLL/xml/com.viscosityvpn.Viscosity.plist /Users/"$NEWUSERNAME"/Library/Preferences/
-echo "$ADMINPASS" | sudo -S cp /volumes/EPENROLL/xml/com.apple.dock.plist /Users/"$NEWUSERNAME"/Library/Preferences
+echo "$ADMINPASS" | sudo -S cp xml/com.viscosityvpn.Viscosity.plist /Users/"$NEWUSERNAME"/Library/Preferences/
+echo "$ADMINPASS" | sudo -S cp xml/com.apple.dock.plist /Users/"$NEWUSERNAME"/Library/Preferences
 echo "$ADMINPASS" | sudo -S chown "$NEWUSERNAME" /Users/"$NEWUSERNAME"/Library/Preferences/com.viscosityvpn.Viscosity.plist
 
 # Install Dockutil
-echo "$ADMINPASS" | sudo -S cp /volumes/EPENROLL/xml/dockutil /usr/local/sbin/
+echo "$ADMINPASS" | sudo -S cp xml/dockutil /usr/local/sbin/
 
 # Updating MacOS
 echo "Updating macOS"
@@ -155,12 +151,12 @@ echo "Chrome Installed. Please verify automatic updates are enabled."
 
 # Copy Slack into Apps folder
 echo "$ADMINPASS" | sudo -S mkdir /Users/"$NEWUSERNAME"/Applications
-echo "$ADMINPASS" | sudo -S unzip -d /Users/"$NEWUSERNAME"/Applications/ /volumes/EPENROLL/Slack.zip 
+echo "$ADMINPASS" | sudo -S unzip -d /Users/"$NEWUSERNAME"/Applications/ Slack.zip 
 echo "$ADMINPASS" | sudo -S chmod -R 755 /Users/"$NEWUSERNAME"/Applications
 echo "Slack installed"
 
 # Copy RingCentral into Apps folder
-echo "$ADMINPASS" | sudo -S unzip -d /Users/"$NEWUSERNAME"/Applications /volumes/EPENROLL/RingCentral%20Phone.zip
+echo "$ADMINPASS" | sudo -S unzip -d /Users/"$NEWUSERNAME"/Applications RingCentral%20Phone.zip
 echo "RingCentral Phone installed"
 
 # Modify the new user's dock
