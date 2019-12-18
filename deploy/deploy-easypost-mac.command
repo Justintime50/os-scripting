@@ -177,7 +177,7 @@ yes | hdiutil attach -noverify -nobrowse -mountpoint "$temp"/mount "$tmpfile"
 echo "$ADMINPASS" | sudo -S cp -r "$temp"/mount/*.app /Applications
 hdiutil detach "$temp"/mount
 echo "$ADMINPASS" | sudo -S rm -r "$tmpfile"
-sleep 5 # Sometimes Viscosity opens too quickly so we'll wait here
+sleep 8 # Sometimes Viscosity opens too quickly so we'll wait here
 open -a Viscosity # We open Viscosity to click through the prompt for the helper tool installer
 echo "Viscosity Installed" 
 
