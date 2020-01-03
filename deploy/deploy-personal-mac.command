@@ -30,13 +30,12 @@ echo "[core]
 brew install php # we'll use Brew's PHP and not the built in Mac PHP
 curl -sS https://getcomposer.org/installer | php
 echo "$PASSWORD" | sudo -S mv composer.phar composer
-echo "$PASSWORD" | sudo -S mv composer.phar /usr/local/bin/
+echo "$PASSWORD" | sudo -S mv composer /usr/local/bin/
 echo "$PASSWORD" | sudo -S chmod 755 /usr/local/bin/composer
-echo 'alias composer="php /usr/local/bin/composer"' >> ~/.zshrc
 
 # Install Laravel Globally
 composer global require laravel/installer
-echo "export PATH='$HOME/.composer/vendor/bin:$PATH'" >> ~/.zshrc
+echo "$HOME/.composer/vendor/bin'" >> ~/etc/paths
 
 # Install Node package managers and Node
 brew install npm
@@ -45,13 +44,7 @@ brew install yarn
 
 # Install Python3, PIP, and packages
 # brew install python3 # Already installed as a PHP dependency
-echo "alias python='python3'" >> ~/.zshrc
-echo "alias pip='pip3'" >> ~/.zshrc
-pip install beautifulsoup4
-
-# Source all the changes we've made
-# shellcheck source=/dev/null
-source ~/.zshrc
+pip3 install beautifulsoup4
 
 # Install apps
 brew cask install docker
