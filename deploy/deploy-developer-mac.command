@@ -23,9 +23,9 @@ source ~/.zshrc
 composer --version
 
 # Install other items
-brew install npm
+brew install node
 brew install yarn
-brew install python3
+brew install python
 brew install git
 brew cask install docker
 brew cask install visual-studio-code

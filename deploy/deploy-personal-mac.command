@@ -38,9 +38,8 @@ composer global require laravel/installer
 echo "$HOME/.composer/vendor/bin'" >> ~/etc/paths
 
 # Install Node package managers and Node
-brew install npm
+brew install node
 brew install yarn
-# brew install node # Already installed as an npm dependency
 
 # Install Python3, PIP, and packages
 # brew install python3 # Already installed as a PHP dependency
