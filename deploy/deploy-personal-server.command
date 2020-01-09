@@ -33,11 +33,10 @@ brew install php # we'll use Brew's PHP and not the built in Mac PHP
 brew cask install smcfancontrol
 brew cask install docker
 brew cask install kitematic
-brew cask install sublime-text
+brew cask install visual-studio-code
 brew cask install google-chrome
 brew cask install teamviewer
 brew cask install ccleaner
-brew cask install funter
 brew cask install makemkv
 
 # Check for updates and restart

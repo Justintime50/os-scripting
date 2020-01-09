@@ -54,7 +54,6 @@ brew cask install firefox
 brew cask install teamviewer
 brew cask install slack
 brew cask install ccleaner
-brew cask install funter
 brew cask install mamp
 brew cask install steam
 brew cask install 1password
