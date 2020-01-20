@@ -41,13 +41,19 @@ See the [Gotchas](src/docs/gotchas.md) doc for gotchas on administering macOS in
 
 ### Creating Scripts
 
-When creating a new script, make sure to save the file as a script file `.sh` or `.command` for double click execution and make the file executable with `sudo chmod 755 <filename>`.
+1. When creating a new script, save the file with the `.sh` extension to execute from a terminal or `.command` for double click execution.
+1. Make the file executable:
+
+```bash
+chmod 755 <filename>
+```
 
 ### Running Scripts
 
-If a script ends in `.command` the file can simply be double clicked.
+If a script has the `.command` extension, the file can simply be double clicked like any program.
 
-If a script ends in `.sh`, drag it into the terminal or navigate to the directory it's housed in and run `./script-name.sh` and hit enter.
+If a script ends with the `.sh` extension, either drag the script file into the terminal or navigate to the directory it's housed in and run `./script-name.sh` and hit enter.
 
 ## Testing
+
 This project is tested with [ShellCheck](https://github.com/koalaman/shellcheck) via [Travis CI](https://travis-ci.org/Justintime50/mac-scripting).
