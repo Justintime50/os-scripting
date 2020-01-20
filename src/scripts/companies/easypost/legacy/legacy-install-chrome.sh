@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This is a method to install Chrome without Homebrew.
+
 # Navigate to downloads
 cd Downloads || exit
 

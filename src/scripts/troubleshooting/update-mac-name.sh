@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Update the Mac's name throughout the system.
+
 export MY_NAME="NAME HERE"
 sudo scutil --set ComputerName "$MY_NAME" && \
 sudo scutil --set HostName "$MY_NAME" && \

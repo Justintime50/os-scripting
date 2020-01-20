@@ -1,7 +1,8 @@
 language: bash
 
 script:
-  # Fail if any of these files have warnings
-  - shellcheck deploy/*.command
-  - shellcheck troubleshooting/*.sh
-  - shellcheck legacy/*.sh
+  - shellcheck src/scripts/companies/buyboxexperts/*.command
+  - shellcheck src/scripts/companies/easypost/*.command
+  - shellcheck src/scripts/legacy/*.sh
+  - shellcheck src/scripts/personal/*.command
+  - shellcheck src/scripts/troubleshooting/*.command

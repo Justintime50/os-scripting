@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script resets the DEP Enrollment prompt
+# This script resets the DEP Enrollment prompt for High Sierra and later.
 
 rm /volumes/Macintosh\ HD/var/db/.AppleSetupDone 
 rm /volumes/Macintosh\ HD/var/db/ConfigurationProfiles/Setup/.profileSetupDone 

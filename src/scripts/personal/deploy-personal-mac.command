@@ -75,6 +75,7 @@ brew cask install nrlquaker-winbox
 brew cask install aerial
 brew cask install postman
 brew cask install virtualbox # Troubled installer, requires password and permissions on Catalina
+brew cask install handbrake
 
 # Check for updates and restart
 echo "$PASSWORD" | sudo -S softwareupdate -i -a

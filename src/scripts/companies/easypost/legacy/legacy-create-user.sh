@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This is a deprecated approach to creating a user and should only be used on Sierra and earlier.
+
 sudo dscl . -create /Users/username # swap username for the one-word username of the user
 sudo dscl . -create /Users/username UserShell /bin/bash # sets the default shell
 sudo dscl . -create /Users/username RealName "NAME HERE" # swap the name in quotes for the user's real name

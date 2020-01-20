@@ -30,7 +30,7 @@ echo "[core]
 brew install php # we'll use Brew's PHP and not the built in Mac PHP
 
 # Install apps
-brew cask install smcfancontrol
+brew cask install smcfancontrol # only use if non-oem SSD was installed
 brew cask install docker
 brew cask install kitematic
 brew cask install visual-studio-code

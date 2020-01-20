@@ -25,7 +25,7 @@ composer --version
 # Install other items
 brew install node
 brew install yarn
-brew install python
+# brew install python # already installed by PHP as a dependency
 brew install git
 brew cask install docker
 brew cask install visual-studio-code
