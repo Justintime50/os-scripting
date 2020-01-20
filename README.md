@@ -29,9 +29,13 @@ The following scripts can be used to troubleshoot macOS.
 
 ## Docs
 
-## Single Commands
+### Single Commands
 
-See the Single Commands [README](/single-commands.md) for info on useful terminal commands.
+See the [Single Commands](src/docs/single-commands.md) doc for info on useful terminal commands.
+
+### Gotchas
+
+See the [Gotchas](src/docs/gotchas.md) doc for gotchas on administering macOS in enterprise.
 
 ## Usage
 

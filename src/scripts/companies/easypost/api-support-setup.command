@@ -22,8 +22,8 @@ brew install maven
 brew cask install visual-studio-code --appdir=/Users/"$USERNAME"/Applications
 
 # We switch the Homebrew instance ownership to the user instead of epadmin here
-sudo chown -R "$USERNAME" $(brew --prefix)/*
-chmod u+w $(brew --prefix)/*
+sudo chown -R "$USERNAME" "$(brew --prefix)"/*
+chmod u+w "$(brew --prefix)"/*
 
 # If running from Meraki:
 # `systemsetup setremotelogin off`

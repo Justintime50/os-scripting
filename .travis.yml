@@ -5,4 +5,4 @@ script:
   - shellcheck src/scripts/companies/easypost/*.command
   - shellcheck src/scripts/legacy/*.sh
   - shellcheck src/scripts/personal/*.command
-  - shellcheck src/scripts/troubleshooting/*.command
+  - shellcheck src/scripts/troubleshooting/*.sh
