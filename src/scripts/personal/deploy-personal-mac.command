@@ -19,12 +19,6 @@ brew doctor
 
 # Install Git
 brew install git
-# Configure git config file
-echo "[core]
-	editor = nano
-[user]
-	name = Justintime50
-	email = justinpaulhammond@gmail.com" >> ~/.gitconfig
 
 # Install PHP & Composer for PHP package management
 brew install php # we'll use Brew's PHP and not the built in Mac PHP
@@ -35,7 +29,6 @@ echo "$PASSWORD" | sudo -S chmod 755 /usr/local/bin/composer
 
 # Install Laravel Globally
 composer global require laravel/installer
-echo "$HOME/.composer/vendor/bin'" >> ~/etc/paths
 
 # Install Node package managers and Node
 brew install node

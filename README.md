@@ -2,7 +2,7 @@
 
 # Mac Scripting
 
-This is a collection of macOS scripts that can be used to automate deploying and administrating macOS devices.
+A collection of macOS scripts that can be used to automate deploying and administrating macOS devices.
 
 [![Build Status](https://travis-ci.org/Justintime50/mac-scripting.svg?branch=master)](https://travis-ci.org/Justintime50/mac-scripting)
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
@@ -16,16 +16,22 @@ This project is intended to save IT professionals valuable hours, reduce user er
 ## Scripts
 
 ### Companies
-These are scripts I built at the companies I've worked with either for deploying machines or troubleshooting issues.
+
+The `companies` folder contains scripts I built at the companies I've worked with either for deploying machines or troubleshooting issues.
 
 ### Legacy
+
 The `legacy` folder contains depricated scripts replaced elsewhere.
 
 ### Personal
-These are opinionated scripts I've used for re-deploying my personal machine and server.
+
+The `personal` folder contains opinionated scripts I've used for re-deploying my personal machine and server.
+
+**NOTE:** Personal scripts should be used in conjuction with my [Dotfiles project](https://github.com/Justintime50/dotfiles) as no configuration happens in these personal scripts.
 
 ### Troubleshooting
-The following scripts can be used to troubleshoot macOS.
+
+The `troubleshooting` folder contains scripts that can be used to troubleshoot macOS.
 
 ## Docs
 
@@ -39,13 +45,20 @@ See the [Gotchas](src/docs/gotchas.md) doc for gotchas on administering macOS in
 
 ## Usage
 
+To run a script without downloading this entire project, use the following. Change out the name/destination of the script in this repo in the command below:
+
+```bash
+# NOTE: not all scripts in this project can be run this way, some require to be downloaded
+bash <(curl -s https://raw.githubusercontent.com/justintime50/mac-scripting/master/src/scripts/companies/buyboxexperts/deploy-bbe-mac.command)
+```
+
 ### Creating Scripts
 
 1. When creating a new script, save the file with the `.sh` extension to execute from a terminal or `.command` for double click execution.
-1. Make the file executable:
+1. Make the file executable, replace FILENAME with the name of your file:
 
 ```bash
-chmod 755 <filename>
+chmod 755 FILENAME
 ```
 
 ### Running Scripts

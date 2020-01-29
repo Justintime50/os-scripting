@@ -19,12 +19,6 @@ brew doctor
 
 # Install Git
 brew install git
-# Configure git config file
-echo "[core]
-	editor = nano
-[user]
-	name = Justintime50
-	email = justinpaulhammond@gmail.com" >> ~/.gitconfig
 
 # Install PHP
 brew install php # we'll use Brew's PHP and not the built in Mac PHP
