@@ -19,9 +19,10 @@ brew doctor
 
 # Install Git
 brew install git
+mkdir "$HOME"/git
 
 # Install PHP & Composer for PHP package management
-brew install php # we'll use Brew's PHP and not the built in Mac PHP
+brew install php # we'll use Brew's PHP and not the built in Mac PHP, Python is installed as a dependency of PHP
 curl -sS https://getcomposer.org/installer | php
 echo "$PASSWORD" | sudo -S mv composer.phar composer
 echo "$PASSWORD" | sudo -S mv composer /usr/local/bin/
@@ -33,10 +34,6 @@ composer global require laravel/installer
 # Install Node package managers and Node
 brew install node
 brew install yarn
-
-# Install Python3, PIP, and packages
-# brew install python3 # Already installed as a PHP dependency
-pip3 install beautifulsoup4
 
 # Install apps
 brew cask install docker
@@ -68,6 +65,9 @@ brew cask install aerial
 brew cask install postman
 brew cask install virtualbox # Troubled installer, requires password and permissions on Catalina
 brew cask install handbrake
+
+# Install dotfiles
+bash <(curl -s https://raw.githubusercontent.com/justintime50/dotfiles/master/src/personal/install.sh)
 
 # Check for updates and restart
 echo "$PASSWORD" | sudo -S softwareupdate -i -a
