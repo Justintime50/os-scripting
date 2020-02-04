@@ -15,11 +15,11 @@ xcode-select --install
 
 # Install Homebrew
 echo "$PASSWORD" | sudo -S curl -fsS 'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
-brew doctor
 
 # Install Git
 brew install git
 mkdir "$HOME"/git
+mkdir "$HOME"/personal
 
 # Install PHP & Composer for PHP package management
 brew install php # we'll use Brew's PHP and not the built in Mac PHP, Python is installed as a dependency of PHP
@@ -63,8 +63,8 @@ brew cask install tor-browser
 brew cask install nrlquaker-winbox
 brew cask install aerial
 brew cask install postman
-brew cask install virtualbox # Troubled installer, requires password and permissions on Catalina
 brew cask install handbrake
+brew cask install tunnelblick
 
 # Install dotfiles
 bash <(curl -s https://raw.githubusercontent.com/justintime50/dotfiles/master/src/personal/install.sh)
