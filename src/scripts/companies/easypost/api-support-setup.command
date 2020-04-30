@@ -10,7 +10,7 @@ echo "Enter the epadmin password: "
 read -rs EPPASSWORD
 
 # Install Brew and all Supported Programming Languages
-echo "$EPPASSWORD" | sudo -S curl -fsS 'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
+echo "$EPPASSWORD" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 # brew install git # macOS already comes with Git installed
 brew install node # installs npm as a part of this
 brew install ruby
@@ -19,6 +19,7 @@ brew install php
 brew install go
 brew cask install adoptopenjdk # must come before maven, will require an admin password to install
 brew install maven
+brew cask install dotnet-sdk
 brew cask install visual-studio-code --appdir=/Users/"$USERNAME"/Applications
 
 # We switch the Homebrew instance ownership to the user instead of epadmin here

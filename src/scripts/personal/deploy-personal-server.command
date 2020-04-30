@@ -14,7 +14,7 @@ read -rs PASSWORD
 xcode-select --install
 
 # Install Homebrew
-echo "$PASSWORD" | sudo -S curl -fsS 'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
+echo "$PASSWORD" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 # Install Git
 brew install git

@@ -14,7 +14,7 @@ read -rs PASSWORD
 xcode-select --install
 
 # Install Homebrew
-echo "$PASSWORD" | sudo -S curl -fsS 'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
+echo "$PASSWORD" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 # Install Git
 brew install git
@@ -43,7 +43,6 @@ brew cask install firefox
 brew cask install teamviewer
 brew cask install slack
 brew cask install ccleaner
-brew cask install mamp
 brew cask install steam
 brew cask install 1password
 brew cask install rocket-chat
@@ -60,11 +59,11 @@ brew cask install mysqlworkbench
 brew cask install origin
 brew cask install battle-net
 brew cask install tor-browser
-brew cask install nrlquaker-winbox
 brew cask install aerial
 brew cask install postman
 brew cask install handbrake
 brew cask install tunnelblick
+brew cask install zoomus
 
 # Install dotfiles
 bash <(curl -s https://raw.githubusercontent.com/justintime50/dotfiles/master/src/personal/install.sh)

@@ -19,8 +19,7 @@ echo "Initializing tools, please acknowledge pop-up windows..."
 xcode-select --install
 
 # Install Homebrew
-echo "$PASSWORD" | sudo -S curl -fsS 'https://raw.githubusercontent.com/Homebrew/install/master/install' | ruby
-brew doctor
+echo "$PASSWORD" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 # Create the BBE Admin user and explicitly add SecureToken
 echo "Creating BBE Admin user..."
