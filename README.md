@@ -4,7 +4,7 @@
 
 A collection of macOS scripts that can be used to automate deploying and administrating macOS devices.
 
-[![Build Status](https://travis-ci.org/Justintime50/mac-scripting.svg?branch=master)](https://travis-ci.org/Justintime50/mac-scripting)
+[![Build Status](https://travis-ci.com/Justintime50/mac-scripting.svg?branch=master)](https://travis-ci.com/Justintime50/mac-scripting)
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 
 <img src="assets/showcase.png">
