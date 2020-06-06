@@ -19,10 +19,18 @@ echo "$PASSWORD" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/
 # Install Git
 brew install git
 mkdir "$HOME"/git
-mkdir "$HOME"/personal
+mkdir "$HOME"/git/personal
 
-# Install PHP & Composer for PHP package management
+# Install Languages
 brew install php # we'll use Brew's PHP and not the built in Mac PHP, Python is installed as a dependency of PHP
+brew install node
+brew install yarn
+brew install rust
+brew cask install adoptopenjdk # must come before maven, will require an admin password to install
+brew install maven
+brew cask install dotnet-sdk
+
+# Install Composer for PHP package management
 curl -sS https://getcomposer.org/installer | php
 echo "$PASSWORD" | sudo -S mv composer.phar composer
 echo "$PASSWORD" | sudo -S mv composer /usr/local/bin/
@@ -30,10 +38,6 @@ echo "$PASSWORD" | sudo -S chmod 755 /usr/local/bin/composer
 
 # Install Laravel Globally
 composer global require laravel/installer
-
-# Install Node package managers and Node
-brew install node
-brew install yarn
 
 # Install apps
 brew cask install docker
@@ -66,7 +70,7 @@ brew cask install tunnelblick
 brew cask install zoomus
 
 # Install dotfiles
-bash <(curl -s https://raw.githubusercontent.com/justintime50/dotfiles/master/src/personal/install.sh)
+curl -s https://raw.githubusercontent.com/justintime50/dotfiles/master/src/scripts/install.sh | bash
 
 # Check for updates and restart
 echo "$PASSWORD" | sudo -S softwareupdate -i -a
