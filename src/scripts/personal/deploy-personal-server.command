@@ -19,23 +19,25 @@ echo "$PASSWORD" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/
 # Install Git
 brew install git
 mkdir "$HOME"/git
-mkdir "$HOME"/personal
+mkdir "$HOME"/git/personal
 
-# Install PHP
+# Install Languages
 brew install php # we'll use Brew's PHP and not the built in Mac PHP, Python is installed as a dependency of PHP
+brew install go
 
 # Install apps
 brew cask install smcfancontrol # only use if non-oem SSD was installed
 brew cask install docker
-brew cask install visual-studio-code
+brew cask install sublime-text
 brew cask install google-chrome
 brew cask install teamviewer
 brew cask install ccleaner
 brew cask install makemkv
-brew cask instlal handbrake
+brew cask install handbrake
+brew cask install backblaze
 
 # Install dotfiles
-bash <(curl -s https://raw.githubusercontent.com/justintime50/dotfiles/master/src/personal/install.sh)
+curl -s https://raw.githubusercontent.com/justintime50/dotfiles/master/src/scripts/install.sh | bash
 
 # Check for updates and restart
 echo "$PASSWORD" | sudo -S softwareupdate -i -a
