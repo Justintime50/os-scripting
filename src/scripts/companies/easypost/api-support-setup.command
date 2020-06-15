@@ -11,11 +11,11 @@ read -rs EPPASSWORD
 
 # Install Brew and all Supported Programming Languages
 echo "$EPPASSWORD" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-# brew install git # macOS already comes with Git installed
+brew install git
 brew install node # installs npm as a part of this
 brew install ruby
 brew install php
-# brew install python # PHP already installs Python3 as a dependency
+brew install python
 brew install go
 brew cask install adoptopenjdk # must come before maven, will require an admin password to install
 brew install maven
