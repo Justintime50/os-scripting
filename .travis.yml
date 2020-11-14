@@ -2,7 +2,8 @@ language: generic
 
 jobs:
   include:
-    - os: osx
+    # Linux is used here because we can test shellcheck much faster in Linux than macOS
+    - os: linux
       language: bash
       script:
         - shellcheck src/macos/companies/buyboxexperts/*.command
@@ -15,6 +16,6 @@ jobs:
       install:
         - PowerShell -Command 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned'
       script:
-        - PowerShell -File src/setup-windows.ps1
-        - PowerShell -File src/spring-clean.ps1
-        - PowerShell -File src/update-windows.ps1
+        - PowerShell -File src/windows/setup-windows.ps1
+        - PowerShell -File src/windows/spring-clean.ps1
+        - PowerShell -File src/windows/update-windows.ps1
