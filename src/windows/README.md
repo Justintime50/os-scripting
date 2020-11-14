@@ -4,7 +4,7 @@
 
 A collection of Windows scripts that can be used to automate deploying and administrating Windows devices.
 
-<img src="../../../assets/windows.png">
+<img src="../../assets/windows.png">
 
 </div>
 
