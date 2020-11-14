@@ -70,7 +70,7 @@ brew cask install tunnelblick
 brew cask install zoomus
 
 # Install dotfiles
-bash <(curl -s https://raw.githubusercontent.com/justintime50/dotfiles/master/src/scripts/install.sh)
+curl -s https://raw.githubusercontent.com/justintime50/dotfiles/master/src/scripts/install.sh | bash
 
 # Check for updates and restart
 echo "$PASSWORD" | sudo -S softwareupdate -i -a

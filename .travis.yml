@@ -1,8 +1,20 @@
-language: bash
+language: generic
 
-script:
-  - shellcheck src/scripts/companies/buyboxexperts/*.command
-  - shellcheck src/scripts/companies/easypost/*.command
-  - shellcheck src/scripts/legacy/*.sh
-  - shellcheck src/scripts/personal/*.command
-  - shellcheck src/scripts/troubleshooting/*.sh
+jobs:
+    inclue:
+        - os: macos
+        language: bash
+        script:
+            - shellcheck src/macos/companies/buyboxexperts/*.command
+            - shellcheck src/macos/companies/easypost/*.command
+            - shellcheck src/macos/legacy/*.sh
+            - shellcheck src/macos/personal/*.command
+            - shellcheck src/macos/troubleshooting/*.sh
+        - os: windows
+        language: c
+        install:
+            - PowerShell -Command 'Set-ExecutionPolicy -ExecutionPolicy RemoteSigned'
+        script:
+            - PowerShell -File src/setup-windows.ps1
+            - PowerShell -File src/spring-clean.ps1
+            - PowerShell -File src/update-windows.ps1
