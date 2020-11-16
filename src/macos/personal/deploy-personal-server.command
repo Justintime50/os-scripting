@@ -37,7 +37,7 @@ brew cask install handbrake
 brew cask install backblaze
 
 # Install dotfiles
-curl -s https://raw.githubusercontent.com/justintime50/dotfiles/master/src/scripts/install.sh | bash
+bash <(curl -s https://raw.githubusercontent.com/justintime50/dotfiles/master/src/scripts/install.sh)
 
 # Check for updates and restart
 echo "$PASSWORD" | sudo -S softwareupdate -i -a
