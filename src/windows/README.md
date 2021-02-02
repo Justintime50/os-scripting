@@ -10,7 +10,7 @@ A collection of Windows scripts that can be used to automate deploying and admin
 
 ## Usage
 
-All scripts are Powershell scripts, **not** command line scripts (batch files). Acccess Powershell by clicking `win + x` keys then select `Windows Powershell (Admin)`.
+All scripts ending in `.ps1` are Powershell scripts, **not** command line scripts (batch files). Acccess Powershell by clicking `win + x` keys then select `Windows Powershell (Admin)`. Otherwise, you can use the `.bat` files in this project on the command line.
 
 ```powershell
 # Allow any downloadable scripts to be executed

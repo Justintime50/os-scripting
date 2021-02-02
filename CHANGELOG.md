@@ -1,5 +1,10 @@
 # CHANGELOG
 
+# v1.1.0 (2021-02-02)
+
+* Switches from Travis CI to GitHub Actions
+* Adds prank script from legacy Windows Lulz project to here
+
 # v1.0.0 (2020-11-13)
 
 * Combined the `windows-scripting` and `mac-scripting` repos into a single project housing scripts for various operating systems since they ultimately serve the same purpose of helping IT professionals deploy and administer devices.

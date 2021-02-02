@@ -26,15 +26,15 @@ brew install php # we'll use Brew's PHP and not the built in Mac PHP, Python is 
 brew install go
 
 # Install apps
-brew cask install smcfancontrol # only use if non-oem SSD was installed
-brew cask install docker
-brew cask install sublime-text
-brew cask install google-chrome
-brew cask install teamviewer
-brew cask install ccleaner
-brew cask install makemkv
-brew cask install handbrake
 brew cask install backblaze
+brew cask install ccleaner
+brew cask install docker
+brew cask install google-chrome
+brew cask install handbrake
+brew cask install makemkv
+brew cask install smcfancontrol # only use if non-oem SSD was installed
+brew cask install sublime-text
+brew cask install teamviewer
 
 # Install dotfiles
 bash <(curl -s https://raw.githubusercontent.com/justintime50/dotfiles/master/src/scripts/install.sh)

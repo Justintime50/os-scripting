@@ -22,13 +22,14 @@ mkdir "$HOME"/git
 mkdir "$HOME"/git/personal
 
 # Install Languages
-brew install php # we'll use Brew's PHP and not the built in Mac PHP, Python is installed as a dependency of PHP
-brew install node
-brew install yarn
-brew install rust
 brew cask install adoptopenjdk # must come before maven, will require an admin password to install
-brew install maven
 brew cask install dotnet-sdk
+brew install maven
+brew install node
+brew install php
+brew install python
+brew install rust
+brew install yarn
 
 # Install Composer for PHP package management
 curl -sS https://getcomposer.org/installer | php
@@ -40,33 +41,33 @@ echo "$PASSWORD" | sudo -S chmod 755 /usr/local/bin/composer
 composer global require laravel/installer
 
 # Install apps
-brew cask install docker
-brew cask install visual-studio-code
-brew cask install google-chrome
-brew cask install firefox
-brew cask install teamviewer
-brew cask install slack
-brew cask install ccleaner
-brew cask install steam
 brew cask install 1password
-brew cask install rocket-chat
-brew cask install gimp
-brew cask install nextcloud
+brew cask install aerial
 brew cask install anytrans
+brew cask install battle-net
+brew cask install ccleaner
 brew cask install discord
+brew cask install docker
+brew cask install firefox
+brew cask install gimp
+brew cask install google-chrome
+brew cask install handbrake
 brew cask install ibackup-viewer
-brew cask install microsoft-word
 brew cask install microsoft-excel
 brew cask install microsoft-powerpoint
+brew cask install microsoft-word
 brew cask install minecraft
 brew cask install mysqlworkbench
+brew cask install nextcloud
 brew cask install origin
-brew cask install battle-net
-brew cask install tor-browser
-brew cask install aerial
 brew cask install postman
-brew cask install handbrake
+brew cask install rocket-chat
+brew cask install slack
+brew cask install steam
+brew cask install teamviewer
+brew cask install tor-browser
 brew cask install tunnelblick
+brew cask install visual-studio-code
 brew cask install zoomus
 
 # Install dotfiles
