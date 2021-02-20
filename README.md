@@ -19,6 +19,6 @@ Each operating system has a separate folder in the `src` directory with its own 
 
 **Note:** Some of the macOS and Linux scripts can be used on either OS.
 
-- [macOS Scripting](src/scripts/macos/README.md)
-- Linux Scripting (Coming Soon)
-- [Windows Scripting](src/scripts/windows/README.md)
+- [macOS Scripting](src/macos/README.md)
+- [Linux Scripting](src/linux/README.md)
+- [Windows Scripting](src/windows/README.md)
