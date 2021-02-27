@@ -18,7 +18,7 @@ jobs:
       - name: Run Powershell scripts
         run: |
           Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
-          src/windows/maintenance/setup-windows
+          src/windows/setup/setup-windows
           src/windows/maintenance/spring-clean
           src/windows/maintenance/update-windows
         shell: powershell
