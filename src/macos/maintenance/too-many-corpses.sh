@@ -7,7 +7,7 @@
 main() {
     cd /Volumes/Macintosh\ HD/var/db/caches/opendirectory
     mv ./mbr_cache ./mbr_cache-old
-    sudo shutdown -r
+    shutdown -r now
 }
 
 main
