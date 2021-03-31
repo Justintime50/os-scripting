@@ -21,4 +21,5 @@ Each operating system has a separate folder in the `src` directory with its own 
 
 - [macOS Scripting](src/macos/README.md)
 - [Linux Scripting](src/linux/README.md)
+- [UbiOS Scripting](src/ubios/README.md)
 - [Windows Scripting](src/windows/README.md)
