@@ -61,3 +61,8 @@ chmod 755 FILENAME
 If a script has the `.command` extension, the file can simply be double clicked like any program.
 
 If a script ends with the `.sh` extension, either drag the script file into the terminal or navigate to the directory it's housed in and run `./script-name.sh` and hit enter.
+
+## Attribution
+
+* [Scripting the "Notes" Application](https://www.macosxautomation.com/applescript/notes/index.html)
+* [Export Notes via AppleScript](https://gist.github.com/jthigpen/5067358)
