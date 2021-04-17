@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.3.0 (2021-04-17)
+
+* adds UbiOS script to download Unifi config backups for Network, Protect, Access, and Talk
+
 ## v1.2.0 (2021-02-20)
 
 * Added Raspberry Pi scripts as the first Linux scripts to the project

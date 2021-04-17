@@ -5,7 +5,7 @@ The Unifi family and its associated products are pretty user friendly, but when 
 ## Setup
 
 ```bash
-# Add SSH keys to device 
+# Add SSH keys to device (note, these get wiped out on each device reboot)
 ssh-copy-id root@192.168.1.1
 
 # SSH into your router
@@ -13,6 +13,13 @@ ssh root@192.168.1.1
 ```
 
 ## Usage
+
+### Download Unifi Config Backups
+
+```bash
+# Downloads all of your Unifi config backups (see file for more info)
+download_config_backups.sh ~/my_dir my_username 172.168.0.1 30
+```
 
 ### See DHCP Lease Table (Router)
 
