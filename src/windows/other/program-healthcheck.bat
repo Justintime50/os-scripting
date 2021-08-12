@@ -1,5 +1,6 @@
 :main
     :: Run healthcheck every 60 seconds
+    :: TODO: For better performance, don't use this timed loop - setup a scheduled task instead
     @echo off
     timeout /t 60
     GOTO program_healthcheck
