@@ -4,7 +4,7 @@
 
 A collection of Windows scripts that can be used to automate deploying and administrating Windows devices.
 
-<img src="../../assets/windows.png">
+<img src="https://raw.githubusercontent.com/justintime50/assets/main/src/os-scripting/windows.png" alt="Showcase">
 
 </div>
 

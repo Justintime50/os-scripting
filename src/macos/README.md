@@ -4,7 +4,7 @@
 
 A collection of macOS scripts that can be used to automate deploying and administrating macOS devices.
 
-<img src="../../assets/macos.png">
+<img src="https://raw.githubusercontent.com/justintime50/assets/main/src/os-scripting/macos.png" alt="Showcase">
 
 </div>
 

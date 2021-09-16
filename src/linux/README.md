@@ -1,10 +1,6 @@
-<div align="center">
-
 # Linux Scripts
 
 A collection of Linux scripts that can be used to automate deploying and administrating Linux devices.
-
-</div>
 
 ## Scripts
 

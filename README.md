@@ -7,7 +7,7 @@ A collection of macOS, Linux, and Windows scripts that can be used to automate d
 [![Build Status](https://github.com/Justintime50/os-scripting/workflows/build/badge.svg)](https://github.com/Justintime50/os-scripting/actions)
 [![Licence](https://img.shields.io/github/license/justintime50/os-scripting)](LICENSE)
 
-<img src="assets/macos.png">
+<img src="https://raw.githubusercontent.com/justintime50/assets/main/src/os-scripting/macos.png" alt="Showcase">
 
 </div>
 
