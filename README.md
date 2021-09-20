@@ -5,6 +5,7 @@
 A collection of macOS, Linux, and Windows scripts that can be used to automate deploying and administrating computers.
 
 [![Build Status](https://github.com/Justintime50/os-scripting/workflows/build/badge.svg)](https://github.com/Justintime50/os-scripting/actions)
+[![Version](https://img.shields.io/github/v/tag/justintime50/os-scripting)](https://github.com/justintime50/os-scripting/releases)
 [![Licence](https://img.shields.io/github/license/justintime50/os-scripting)](LICENSE)
 
 <img src="https://raw.githubusercontent.com/justintime50/assets/main/src/os-scripting/macos.png" alt="Showcase">

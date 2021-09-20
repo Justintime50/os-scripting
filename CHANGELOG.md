@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.4.0 (2021-09-20)
+
+* Migrates the `devvm` vagrant project into `os-scripting`, now you can easily spin up a Linux machine from code!
+
 ## v1.3.0 (2021-04-17)
 
 * Adds UbiOS script to download Unifi config backups for Network, Protect, Access, and Talk
