@@ -19,7 +19,8 @@ Each operating system has a separate folder in the `src` directory with its own 
 
 **Note:** Some of the macOS and Linux scripts can be used on either OS.
 
-- [macOS Scripting](src/macos/README.md)
-- [Linux Scripting](src/linux/README.md)
-- [UbiOS Scripting](src/ubios/README.md)
-- [Windows Scripting](src/windows/README.md)
+* [macOS Scripting](src/macos/README.md)
+* [Linux Scripting](src/linux/README.md)
+* [UbiOS Scripting](src/ubios/README.md)
+* [Vagrant Scripting](src/vagrant/README.md)
+* [Windows Scripting](src/windows/README.md)
