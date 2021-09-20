@@ -22,3 +22,19 @@ jobs:
           src/windows/maintenance/spring-clean
           src/windows/maintenance/update-windows
         shell: powershell
+  vagrant-install-macos:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+      - name: Install project
+        run: ./src/vagrant/scripts/install.sh
+  vagrant-install-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Install project
+        run: src/vagrant/scripts/install.bat
