@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# shellcheck disable=SC1091
+
 ## DEPLOY PERSONAL MAC
 ## Can be used for MacBook or Server
 
