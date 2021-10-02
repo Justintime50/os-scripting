@@ -9,3 +9,5 @@ main() {
     systemctl enable sshd
     systemctl start sshd
 }
+
+main
