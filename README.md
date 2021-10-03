@@ -2,10 +2,9 @@
 
 # OS Scripting
 
-A collection of macOS, Linux, and Windows scripts that can be used to automate deploying and administrating computers.
+A collection of macOS, Linux, Windows, and other operating system scripts that can be used to automate deploying and administrating computers.
 
 [![Build Status](https://github.com/Justintime50/os-scripting/workflows/build/badge.svg)](https://github.com/Justintime50/os-scripting/actions)
-[![Version](https://img.shields.io/github/v/tag/justintime50/os-scripting)](https://github.com/justintime50/os-scripting/releases)
 [![Licence](https://img.shields.io/github/license/justintime50/os-scripting)](LICENSE)
 
 <img src="https://raw.githubusercontent.com/justintime50/assets/main/src/os-scripting/macos.png" alt="Showcase">
@@ -20,8 +19,9 @@ Each operating system has a separate folder in the `src` directory with its own 
 
 **Note:** Some of the macOS and Linux scripts can be used on either OS.
 
-* [macOS Scripting](src/macos/README.md)
 * [Linux Scripting](src/linux/README.md)
+* [macOS Scripting](src/macos/README.md)
+* [Raspberry Pi Scripting](src/raspberry-pi/README.md)
 * [UbiOS Scripting](src/ubios/README.md)
 * [Vagrant Scripting](src/vagrant/README.md)
 * [Windows Scripting](src/windows/README.md)

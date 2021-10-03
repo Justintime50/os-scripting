@@ -43,8 +43,8 @@ See the [Gotchas](src/docs/gotchas.md) doc for gotchas on administering macOS in
 To run a script without downloading this entire project, use the following. Change out the name/destination of the script in this repo in the command below:
 
 ```bash
-# NOTE: not all scripts in this project can be run this way, some require to be downloaded
-bash <(curl -s https://raw.githubusercontent.com/justintime50/mac-scripting/master/src/scripts/companies/buyboxexperts/deploy-bbe-mac.command)
+# NOTE: not all scripts in this project can be run this way, some require being downloaded which is the recommended approach
+bash <(curl -s https://raw.githubusercontent.com/justintime50/mac-scripting/main/src/scripts/companies/buyboxexperts/deploy-bbe-mac.command)
 ```
 
 ### Creating Scripts

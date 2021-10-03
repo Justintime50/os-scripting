@@ -6,14 +6,19 @@
 ## Can be used for MacBook or Server
 
 main() {
+    echo "This script is almost completely automated! It will prompt for an initial password, initial computer name, and eventually copy your SSH key to the clipboard to be pasted into GitHub. Finally, you'll press enter to restart the device and install updates."
+    
     { # Wrap script in error logging
         prompt_for_password
+        change_computer_name
         install_command_line_tools
         install_homebrew
         install_git
         install_composer
         install_dotfiles
         install_brewfile
+        install_updates
+        generate_ssh_key
     } 2> ~/deploy_script.log # End error logging wrapper
 
     cleanup
@@ -23,6 +28,19 @@ prompt_for_password() {
     # Gather necessary input
     echo -n "Admin Password: "
     read -rs PASSWORD
+}
+
+change_computer_name() {
+    # Change the computer name in all applicable places
+    echo -n "New computer name (eg: 'MacBook-Pro-Justin' or 'Server'): "
+    read -rs NEW_COMPUTER_NAME
+
+    echo "$PASSWORD" | sudo scutil --set ComputerName "$NEW_COMPUTER_NAME"
+    echo "$PASSWORD" | sudo scutil --set HostName "$NEW_COMPUTER_NAME"
+    echo "$PASSWORD" | sudo scutil --set LocalHostName "$NEW_COMPUTER_NAME"
+    echo "$PASSWORD" | sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$NEW_COMPUTER_NAME"
+    
+    dscacheutil -flushcache # flush the DNS cache for good measure
 }
 
 install_command_line_tools() {
@@ -72,9 +90,22 @@ install_brewfile() {
     fi
 }
 
-cleanup() {
-    # Check for updates and restart
+install_updates() {
+    # Download updates, installation happens on a reboot
     echo "$PASSWORD" | sudo -S softwareupdate -i -a
+}
+
+generate_ssh_key() {
+    # Generates an SSH key and copies it to the clipboard
+    # Intended for immediate use by adding to GitHub or wherever it's needed
+    # Will require user input for location and password, should be the only part of the script that isn't automated aside from the initial password.
+    ssh-keygen -t rsa
+    pbcopy < ~/.ssh/id_rsa.pub
+    echo "Public SSH key copied to clipboard, please paste wherever it's needed."
+}
+
+cleanup() {
+    # Clean up after the script runs and reboot
     open ~/deploy_script.log # Open the log and have the user check for errors before finishing
     echo -e "Script complete.\nPlease check error log (automatically opened) before restarting.\n\nPress <enter> to restart."
     read -rn 1
