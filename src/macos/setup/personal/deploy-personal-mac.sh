@@ -84,8 +84,8 @@ install_dotfiles() {
     # Install dotfiles
     git clone https://github.com/Justintime50/dotfiles.git "$HOME/.dotfiles"
     cd "$HOME/.dotfiles" && git submodule init && git submodule update
-    echo ". $HOME/.dotfiles/dots/src/dots.sh" >> "$HOME/.zshrc"
-    . "$HOME/.zshrc" && DOTFILES_URL="https://github.com/Justintime50/dotfiles.git" dots_sync
+    echo ". $HOME/.dotfiles/dots/src/dots.sh" >> "$HOME/.zshrc" && . "$HOME/.zshrc"
+    DOTFILES_URL="https://github.com/Justintime50/dotfiles.git" dots_sync
 }
 
 install_brewfile() {
