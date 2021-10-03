@@ -12,6 +12,7 @@ main() {
         prompt_for_password
         change_computer_name
         install_command_line_tools
+        install_rosetta
         install_homebrew
         install_git
         install_composer
@@ -32,7 +33,7 @@ prompt_for_password() {
 
 change_computer_name() {
     # Change the computer name in all applicable places
-    echo -n "New computer name (eg: 'MacBook-Pro-Justin' or 'Server'): "
+    echo -n "New computer name (eg: 'MacBook-Pro-Justin', 'Server', 'MacBook-Pro-Justin-EasyPost', etc): "
     read -rs NEW_COMPUTER_NAME
 
     echo "$PASSWORD" | sudo scutil --set ComputerName "$NEW_COMPUTER_NAME"
@@ -46,6 +47,14 @@ change_computer_name() {
 install_command_line_tools() {
     # Install Command Line Tools
     xcode-select --install
+}
+
+install_rosetta() {
+    # Installs Rosetta2 on arm64 Macs (eg: M1 chips)
+    # If i386 (x86_64) Mac, skip installation
+    if [ "$(arch)" = "arm64" ] ; then
+        /usr/sbin/softwareupdate --install-rosetta --agree-to-license
+    fi
 }
 
 install_homebrew() {
@@ -85,6 +94,8 @@ install_brewfile() {
         brew bundle --file "$HOME/.dotfiles/src/personal/Brewfile"
     elif [[ "$HOSTNAME" == "Server" ]] ; then
         brew bundle --file "$HOME/.dotfiles/src/server/Brewfile"
+    elif [[ "$HOSTNAME" == "MacBook-Pro-Justin-EasyPost" ]] ; then
+        brew bundle --file "$HOME/.dotfiles/src/easypost/Brewfile"
     else
         echo "HOSTNAME doesn't match any config for Brewfile installation."
     fi
