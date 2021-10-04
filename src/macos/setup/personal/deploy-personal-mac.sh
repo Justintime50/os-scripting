@@ -11,6 +11,7 @@ main() {
     { # Wrap script in error logging
         prompt_for_password
         change_computer_name
+        setup_preferences
         install_command_line_tools
         install_rosetta
         install_homebrew
@@ -26,7 +27,6 @@ main() {
 }
 
 prompt_for_password() {
-    # Gather necessary input
     echo -n "Admin Password: "
     read -rs PASSWORD
 }
@@ -44,26 +44,57 @@ change_computer_name() {
     dscacheutil -flushcache # flush the DNS cache for good measure
 }
 
+setup_preferences() {
+    # There are MANY more steps that for now will require manual work
+    # TODO: See the accompanying README on personal deployments for more information on manual work required, eventually automate it here
+    # Most of these will require a restart to take effect
+    # Enable dark mode
+    echo "Enabling dark mode..."
+    echo "$PASSWORD" | sudo defaults write /Library/Preferences/.GlobalPreferences.plist _HIEnableThemeSwitchHotKey -bool true
+    
+    # Enable trim for SSD's (may need to be run separately from the rest of this since it has its own prompt)
+    # echo "Enabling Trim for SSDs..."
+    # echo "$PASSWORD" | sudo trim force enable
+    
+    # Change shell to ZSH
+    echo "Changing default shell..."
+    echo "$PASSWORD" | chsh -s /bin/zsh
+
+    # Turn on Firewall
+    echo "Turning on firewall..."
+    echo "$PASSWORD" | sudo -S defaults write /Library/Preferences/com.apple.alf globalstate -int 1
+
+    # Enable Remote Management (will require additional configuration through System Preferences for Mojave 10.14 and higher)
+    echo "Turning on remote management & login..."
+    echo "$PASSWORD" | sudo -S systemsetup -setremotelogin on
+    echo "$PASSWORD" | sudo -S /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -activate -configure -access -on -users admin -privs -all -restart -agent -menu
+
+}
+
 install_command_line_tools() {
     # Install Command Line Tools
+    echo "Installing Xcode..."
     xcode-select --install
 }
 
 install_rosetta() {
     # Installs Rosetta2 on arm64 Macs (eg: M1 chips)
-    # If i386 (x86_64) Mac, skip installation
     if [ "$(arch)" = "arm64" ] ; then
+        echo "arm64 Mac detected, installing Rosetta2..."
         /usr/sbin/softwareupdate --install-rosetta --agree-to-license
+    else
+        # i386 (x86_64) Mac
+        echo "non-arm64 Mac detected, skipping installation of Rosetta2"
     fi
 }
 
 install_homebrew() {
-    # Install Homebrew
+    echo "Installing Homebrew..."
     echo "$PASSWORD" | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 }
 
 install_git() {
-    # Install Git
+    echo "Installating Git..."
     brew install git
     mkdir -p "$HOME"/git
     mkdir -p "$HOME"/git/personal
@@ -71,6 +102,7 @@ install_git() {
 
 install_composer() {
     # Install Composer for PHP package management
+    echo "Installating Composer globally..."
     curl -sS https://getcomposer.org/installer | php
     echo "$PASSWORD" | sudo -S mv composer.phar composer
     echo "$PASSWORD" | sudo -S mv composer /usr/local/bin/
@@ -81,7 +113,6 @@ install_composer() {
 }
 
 install_dotfiles() {
-    # Install dotfiles
     git clone https://github.com/Justintime50/dotfiles.git "$HOME/.dotfiles"
     cd "$HOME/.dotfiles" && git submodule init && git submodule update
     echo ". $HOME/.dotfiles/dots/src/dots.sh" >> "$HOME/.zshrc" && . "$HOME/.zshrc"
@@ -103,6 +134,7 @@ install_brewfile() {
 
 install_updates() {
     # Download updates, installation happens on a reboot
+    echo "Attempting to install updates..."
     echo "$PASSWORD" | sudo -S softwareupdate -i -a
 }
 
@@ -110,6 +142,7 @@ generate_ssh_key() {
     # Generates an SSH key and copies it to the clipboard
     # Intended for immediate use by adding to GitHub or wherever it's needed
     # Will require user input for location and password, should be the only part of the script that isn't automated aside from the initial password.
+    echo "Generating an SSH key..."
     ssh-keygen -t rsa
     pbcopy < ~/.ssh/id_rsa.pub
     echo "Public SSH key copied to clipboard, please paste wherever it's needed."
