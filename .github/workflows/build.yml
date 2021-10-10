@@ -38,3 +38,21 @@ jobs:
         uses: actions/checkout@v2
       - name: Install project
         run: src/vagrant/scripts/install.bat
+  deploy:
+    needs:
+      [
+        "shellcheck",
+        "windows-scripts",
+        "vagrant-install-macos",
+        "vagrant-install-windows",
+      ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Harvey
+        if: github.ref == 'refs/heads/main'
+        uses: distributhor/workflow-webhook@v2
+        env:
+          webhook_type: "json-extended"
+          webhook_url: ${{ secrets.WEBHOOK_URL }}
+          webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
+          data: '{ "pipeline": "pull" }'
