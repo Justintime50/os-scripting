@@ -9,6 +9,7 @@ main() {
     echo "This script is almost completely automated! It will prompt for an initial password, initial computer name, and eventually copy your SSH key to the clipboard to be pasted into GitHub. Finally, you'll press enter to restart the device and install updates."
     
     { # Wrap script in error logging
+        change_shell
         prompt_for_password
         change_computer_name
         setup_preferences
@@ -25,6 +26,13 @@ main() {
     } 2> ~/deploy_script.log # End error logging wrapper
 
     cleanup
+}
+
+change_shell() {
+    # THIS STEP MUST COME FIRST
+    # Change shell to ZSH
+    echo "Changing default shell..."
+    chsh -s /bin/zsh
 }
 
 prompt_for_password() {
@@ -56,10 +64,6 @@ setup_preferences() {
     # Enable trim for SSD's (may need to be run separately from the rest of this since it has its own prompt)
     # echo "Enabling Trim for SSDs..."
     # echo "$PASSWORD" | sudo trim force enable
-    
-    # Change shell to ZSH
-    echo "Changing default shell..."
-    echo "$PASSWORD" | chsh -s /bin/zsh
 
     # Turn on Firewall
     echo "Turning on firewall..."
@@ -82,7 +86,7 @@ install_rosetta() {
     # Installs Rosetta2 on arm64 Macs (eg: M1 chips)
     if [ "$(arch)" = "arm64" ] ; then
         echo "arm64 Mac detected, installing Rosetta2..."
-        /usr/sbin/softwareupdate --install-rosetta --agree-to-license
+        softwareupdate --install-rosetta --agree-to-license
     else
         # i386 (x86_64) Mac
         echo "non-arm64 Mac detected, skipping installation of Rosetta2"
