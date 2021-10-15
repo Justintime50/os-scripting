@@ -6,7 +6,7 @@ The following checklist are items that I do for any new setup (that aren't alrea
 
 - [ ] Sign in to iCloud
 - [ ] Show scroll bars only when scrolling
-- [ ] Turn on trim for SSD (once done as it restarts machine) `sudo trim force enable`
+- [ ] Turn on trim for SSD (once done as it restarts machine) `sudo trimforce enable`
 - [x] Turn on dark mode
 
 ## Desktop & Screen Saver

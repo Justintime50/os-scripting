@@ -63,7 +63,7 @@ setup_preferences() {
     
     # Enable trim for SSD's (may need to be run separately from the rest of this since it has its own prompt)
     # echo "Enabling Trim for SSDs..."
-    # echo "$PASSWORD" | sudo trim force enable
+    # echo "$PASSWORD" | sudo trimforce enable
 
     # Turn on Firewall
     echo "Turning on firewall..."
