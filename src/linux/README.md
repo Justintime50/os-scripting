@@ -1,6 +1,6 @@
 # Linux Scripts
 
-A collection of Linux scripts that can be used to automate deploying and administrating Linux devices.
+A collection of Linux scripts that can be used to automate deploying and administering Linux devices.
 
 ## Scripts
 

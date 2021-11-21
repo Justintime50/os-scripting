@@ -2,7 +2,7 @@
 
 # OS Scripting
 
-A collection of macOS, Linux, Windows, and other operating system scripts that can be used to automate deploying and administrating computers.
+A collection of macOS, Linux, Windows, and other operating system scripts that can be used to automate deploying and administering computers.
 
 [![Build Status](https://github.com/Justintime50/os-scripting/workflows/build/badge.svg)](https://github.com/Justintime50/os-scripting/actions)
 [![Licence](https://img.shields.io/github/license/justintime50/os-scripting)](LICENSE)

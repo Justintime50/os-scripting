@@ -2,7 +2,7 @@
 
 # Windows Scripts
 
-A collection of Windows scripts that can be used to automate deploying and administrating Windows devices.
+A collection of Windows scripts that can be used to automate deploying and administering Windows devices.
 
 <img src="https://raw.githubusercontent.com/justintime50/assets/main/src/os-scripting/windows.png" alt="Showcase">
 
