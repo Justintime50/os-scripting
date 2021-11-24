@@ -11,7 +11,7 @@ jobs:
       - name: Run sh-checker
         uses: luizm/action-sh-checker@master
         env:
-          SHFMT_OPTS: -d
+          SHFMT_OPTS: -i 4 -d
   windows-scripts:
     runs-on: windows-latest
     steps:
