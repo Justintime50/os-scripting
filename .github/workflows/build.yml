@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Run sh-checker
         uses: luizm/action-sh-checker@master
-        with:
+        env:
           SHFMT_OPTS: -d
   windows-scripts:
     runs-on: windows-latest
