@@ -3,13 +3,15 @@ name: build
 on: [push, pull_request]
 
 jobs:
-  shellcheck:
+  sh-checker:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      - name: Run ShellCheck
-        uses: ludeeus/action-shellcheck@1.0.0
+      - name: Run sh-checker
+        uses: luizm/action-sh-checker@master
+        with:
+          SHFMT_OPTS: -d
   windows-scripts:
     runs-on: windows-latest
     steps:

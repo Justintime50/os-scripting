@@ -6,7 +6,7 @@
 main() {
     echo "Setting up mail server..."
     # Setup mail credentials
-    echo "smtp.gmail.com:587 EMAIL:PASSWORD" | sudo tee /etc/postfix/sasl_passwd > /dev/null
+    echo "smtp.gmail.com:587 EMAIL:PASSWORD" | sudo tee /etc/postfix/sasl_passwd >/dev/null
     echo "Please fill in the email and password in /etc/postfix/sasl_passwd, press any button to continue once this is done"
     read -rn 1
 
@@ -14,7 +14,7 @@ main() {
     sudo cp /etc/postfix/main.cf /etc/postfix/main.cf.bak
 
     # Write new config options to file
-    sudo tee -a /etc/postfix/main.cf > /dev/null <<EOT
+    sudo tee -a /etc/postfix/main.cf >/dev/null <<EOT
 relayhost = smtp.gmail.com:587
 smtp_sasl_mechanism_filter = plain
 smtp_sasl_auth_enable = yes

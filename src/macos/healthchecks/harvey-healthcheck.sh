@@ -13,7 +13,7 @@ main() {
         cd "$HOME/git/personal/harvey" && make prod
     else
         echo "Harvey's healthcheck passed."
-    fi 
+    fi
 }
 
 main
