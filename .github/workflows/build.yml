@@ -43,7 +43,7 @@ jobs:
   deploy:
     needs:
       [
-        "shellcheck",
+        "sh-checker",
         "windows-scripts",
         "vagrant-install-macos",
         "vagrant-install-windows",
