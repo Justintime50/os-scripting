@@ -10,7 +10,7 @@
 DOCKER_API_VERSION="1.41"
 
 main() {
-    if curl --unix-socket /var/run/docker.sock http:/v"$DOCKER_API_VERSION"/containers/json 2>&1 | grep -q "Couldn't connect\|connection refused\|Bad response from Docker engine"; then
+    if curl --unix-socket /var/run/docker.sock http:/v"$DOCKER_API_VERSION"/_ping 2>&1 | grep -q "Couldn't connect\|connection refused\|Bad response from Docker engine\|Something went wrong."; then
         case "$OSTYPE" in
         darwin*)
             echo "Docker's healthcheck failed, restarting Docker..." >&2
