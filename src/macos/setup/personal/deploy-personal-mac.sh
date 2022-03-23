@@ -74,6 +74,93 @@ setup_preferences() {
     echo "$PASSWORD" | sudo -S systemsetup -setremotelogin on
     echo "$PASSWORD" | sudo -S /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -activate -configure -access -on -users admin -privs -all -restart -agent -menu
 
+    # Setup the Dock
+    echo "Setting up the Dock..."
+    defaults write com.apple.dock "autohide" -bool "true"
+    defaults write com.apple.dock "show-recents" -bool "false"
+
+    # Always show hidden files
+    echo "Enabling hidden files..."
+    defaults write com.apple.finder AppleShowAllFiles -bool YES
+
+    # Setup Finder
+    echo "Setting up Finder..."
+    defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+    defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
+    defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
+    defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+
+    # Setup the navbar
+    echo "Setting up navbar..."
+    defaults write com.apple.menuextra.clock DateFormat -string "EEE MMM d  j:mm a"
+    defaults write com.apple.menuextra.battery ShowPercent ShowPercent -bool YES
+
+    # Setup Trackpad
+    echo "Setting up the Trackpad..."
+    defaults write com.apple.AppleMultitouchTrackpad ActuateDetents -integer 1
+    defaults write com.apple.AppleMultitouchTrackpad TrackpadFiveFingerPinchGesture -integer 2
+    defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerHorizSwipeGesture -integer 2
+    defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerPinchGesture -integer 2
+    defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerVertSwipeGesture -integer 2
+    defaults write com.apple.AppleMultitouchTrackpad TrackpadHorizScroll -integer 1
+    defaults write com.apple.AppleMultitouchTrackpad TrackpadMomentumScroll -integer 1
+    defaults write com.apple.AppleMultitouchTrackpad TrackpadPinch -integer 1
+    defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick -integer 1
+    defaults write com.apple.AppleMultitouchTrackpad TrackpadRotate -integer 1
+    defaults write com.apple.AppleMultitouchTrackpad TrackpadScroll -integer 1
+    defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -integer 0
+    defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerHorizSwipeGesture -integer 2
+    defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerTapGesture -integer 0
+    defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerVertSwipeGesture -integer 2
+    defaults write com.apple.AppleMultitouchTrackpad TrackpadTwoFingerDoubleTapGesture -integer 1
+    defaults write com.apple.AppleMultitouchTrackpad TrackpadTwoFingerFromRightEdgeSwipeGesture -integer 3
+
+    # Setup Mouse
+    echo "Setting up the Mouse..."
+    defaults write com.apple.AppleMultitouchMouse MouseButtonDivision -integer 55
+    defaults write com.apple.AppleMultitouchMouse MouseButtonMode -integer TwoButton
+    defaults write com.apple.AppleMultitouchMouse MouseHorizontalScroll -integer 1
+    defaults write com.apple.AppleMultitouchMouse MouseMomentumScroll -integer 1
+    defaults write com.apple.AppleMultitouchMouse MouseOneFingerDoubleTapGesture -integer 1
+    defaults write com.apple.AppleMultitouchMouse MouseTwoFingerDoubleTapGesture -integer 3
+    defaults write com.apple.AppleMultitouchMouse MouseTwoFingerHorizSwipeGesture -integer 2
+    defaults write com.apple.AppleMultitouchMouse MouseVerticalScroll -integer 1
+
+    # Setup Keyboard
+    echo "Setting up the Keyboard..."
+    defaults write com.apple.com.apple.touchbar.agent PresentationModeGlobal -string "fullControlStrip"
+
+    # Setup power settings
+    echo "Setting up power settings..."
+    # All power modes
+    echo "$PASSWORD" | sudo pmset -a standbydelaylow 10800
+    echo "$PASSWORD" | sudo pmset -a standby 1
+    echo "$PASSWORD" | sudo pmset -a halfdim 1
+    echo "$PASSWORD" | sudo pmset -a powernap 1
+    echo "$PASSWORD" | sudo pmset -a disksleep 10
+    echo "$PASSWORD" | sudo pmset -a standbydelayhigh 86400
+    echo "$PASSWORD" | sudo pmset -a gpuswitch 2
+    echo "$PASSWORD" | sudo pmset -a hibernatemode 3
+    echo "$PASSWORD" | sudo pmset -a ttyskeepawake 1
+    echo "$PASSWORD" | sudo pmset -a highstandbythreshold 50
+    echo "$PASSWORD" | sudo pmset -a acwake 0
+    echo "$PASSWORD" | sudo pmset -a lidwake 1
+
+    # Charger power mode
+    echo "$PASSWORD" | sudo pmset -c womp 1
+    echo "$PASSWORD" | sudo pmset -c proximitywake 1
+    echo "$PASSWORD" | sudo pmset -c networkoversleep 0
+    echo "$PASSWORD" | sudo pmset -c sleep 0
+    echo "$PASSWORD" | sudo pmset -c displaysleep 0
+
+    # Battery power mode
+    echo "$PASSWORD" | sudo pmset -b proximitywake 0
+    echo "$PASSWORD" | sudo pmset -b sleep 60
+    echo "$PASSWORD" | sudo pmset -b displaysleep 60
+
+    # Restart all the things so preferences take effect (must come last)
+    killall Dock
+    killall Finder
 }
 
 install_command_line_tools() {

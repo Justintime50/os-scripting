@@ -2,10 +2,11 @@
 
 The following checklist are items that I do for any new setup (that aren't already handled via the deploy script). If the items is checked below, I've added an automated CLI implementation in the `deploy-personal-mac.sh` script in this directory. Long-term I'd like to automate as much of this process as possible.
 
+See the accompanying `macos_defaults.md` file for details about Apple `defaults`.
+
 ## General
 
 - [ ] Sign in to iCloud
-- [ ] Show scroll bars only when scrolling
 - [ ] Turn on trim for SSD (once done as it restarts machine) `sudo trimforce enable`
 - [x] Turn on dark mode
 
@@ -17,11 +18,13 @@ The following checklist are items that I do for any new setup (that aren't alrea
 
 ## Dock & Menu Bar
 
-- [ ] Turn on date in nav bar
-- [ ] Hide doc by default
-- [ ] Setup the doc the way we want
-    - [ ] Remove downloads from the doc
-    - [ ] App icons (and their order)
+- [x] Turn on date in nav bar
+- [x] Hide dock by default
+- [x] Show battery percentage
+- [ ] Setup the dock the way we want
+  - [ ] Remove downloads from the dock
+  - [x] Don't show recents
+  - [ ] App icons (and their order)
 
 ## Finder
 
@@ -29,6 +32,8 @@ The following checklist are items that I do for any new setup (that aren't alrea
 - [ ] Add connected servers to the finder sidebar
 - [ ] Add home folder to finder sidebar
 - [ ] Add computer to the finder sidebar
+- [x] Show mounted media on Desktop
+- [x] Enable hidden files
 
 ## Notifications
 
@@ -50,16 +55,16 @@ The following checklist are items that I do for any new setup (that aren't alrea
 
 ## Trackpad & Mouse
 
-- [ ] Enable all the features
+- [x] Enable all the features
 
 ## Keyboard
 
-- [ ] If there is a Touch Bar, set it to the “Expanded Control Strip”
+- [x] If there is a Touch Bar, set it to the “Expanded Control Strip”
 - [ ] Turn keyboard backlight off after 30 seconds
 
 ## Battery
 
-- [ ] Power settings (never turn off when plugged in, 15mins turn off display on battery
+- [x] Power settings (never turn off when plugged in, 15mins turn off display on battery
 
 ## Sharing
 
