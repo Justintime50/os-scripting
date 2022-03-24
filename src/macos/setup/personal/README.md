@@ -6,6 +6,9 @@ See the accompanying `macos_defaults.md` file for details about Apple `defaults`
 
 ## General
 
+- [ ] Install Dotfiles: https://github.com/Justintime50/dotfiles
+- [ ] Install Brewfile for machine: https://github.com/Justintime50/dotfiles
+- [ ] Change shell to `zsh` via `chsh -s /bin/zsh`
 - [ ] Sign in to iCloud
 - [ ] Turn on trim for SSD (once done as it restarts machine) `sudo trimforce enable`
 - [x] Turn on dark mode
