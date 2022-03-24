@@ -4,94 +4,41 @@ The following checklist are items that I do for any new setup (that aren't alrea
 
 See the accompanying `macos_defaults.md` file for details about Apple `defaults`.
 
-## General
+## Manual Tasks
 
-- [ ] Install Dotfiles: https://github.com/Justintime50/dotfiles
-- [ ] Install Brewfile for machine: https://github.com/Justintime50/dotfiles
-- [ ] Change shell to `zsh` via `chsh -s /bin/zsh`
-- [ ] Sign in to iCloud
-- [ ] Turn on trim for SSD (once done as it restarts machine) `sudo trimforce enable`
-- [x] Turn on dark mode
+The following cannot be automated and must be done in the following order:
 
-## Desktop & Screen Saver
+1. [ ] Change shell to `zsh` via `chsh -s /bin/zsh` (open a new terminal once done before proceeding)
+1. [ ] Install Dotfiles: https://github.com/Justintime50/dotfiles
+1. [ ] Install Brewfile for machine: https://github.com/Justintime50/dotfiles
+1. [ ] Sign in to iCloud
+1. [ ] Copy working `git` folder from previous environment
+1. [ ] Automatically keep the Mac up to date
+1. [ ] Turn on FileVault (restart required)
+1. [ ] Turn on trim for SSD (once done as it restarts machine) `sudo trimforce enable` -- only for machines with a custom SSD installed
+
+### Order Insignificant
+
+The following can be done in any order after the above section:
 
 - [ ] Turn on Aerial screensaver
 - [ ] Bottom right corner set to hot corner “screensaver”
 - [ ] Start screensaver after 20 mins
-
-## Dock & Menu Bar
-
-- [x] Turn on date in nav bar
-- [x] Hide dock by default
-- [x] Show battery percentage
 - [ ] Setup the dock the way we want
   - [ ] Remove downloads from the dock
-  - [x] Don't show recents
   - [ ] App icons (and their order)
-
-## Finder
-
 - [ ] Add HD’s to the finder sidebar
 - [ ] Add connected servers to the finder sidebar
 - [ ] Add home folder to finder sidebar
 - [ ] Add computer to the finder sidebar
-- [x] Show mounted media on Desktop
-- [x] Enable hidden files
-
-## Notifications
-
 - [ ] Do not disturb schedule (11:30pm - 7:00 am)
-
-## Security & Privacy
-
-- [ ] Turn on FileVault
 - [ ] Allow Apple Watch to unlock Mac
-- [x] Turn on firewall
-
-## Software Updates
-
-- [ ] Automatically keep the Mac up to date
-
-## Network
-
 - [ ] Set ethernet preference over wifi when available
-
-## Trackpad & Mouse
-
-- [x] Enable all the features
-
-## Keyboard
-
-- [x] If there is a Touch Bar, set it to the “Expanded Control Strip”
-- [ ] Turn keyboard backlight off after 30 seconds
-
-## Battery
-
-- [x] Power settings (never turn off when plugged in, 15mins turn off display on battery
-
-## Sharing
-
-- [x] Enable remote management
-- [x] Set computer name
-
-## Time Machine
-
 - [ ] Enable time machine
 
-## Misc
-
-- [x] Change shell to zsh
-- [x] Whatever else is in the current scripting setup
-- [x] Install homebrew and packages
-- [x] Install dotfiles
-
-## Cron
+**Server**
 
 - [ ] For Server, ensure that `cron` has `full-disk access`
 - [ ] Setup local mail server for things like crontabs: https://gist.github.com/Justintime50/6053e4657dd6d9ccec6cda20ec5389a5
-
-## Server
-
-- [ ] Copy working `git` folder from previous environment
 - [ ] Spin up Harvey and install initially `make install`
 - [ ] Grab the previous crontab env file or rebuild with necessary env variables
