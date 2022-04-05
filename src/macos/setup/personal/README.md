@@ -10,6 +10,7 @@ The following cannot be automated and must be done in the following order:
 
 1. [ ] Change shell to `zsh` via `chsh -s /bin/zsh` (open a new terminal once done before proceeding)
 1. [ ] Install Dotfiles: https://github.com/Justintime50/dotfiles
+1. [ ] Install Git Credential Manager: https://github.com/GitCredentialManager/git-credential-manager
 1. [ ] Install Brewfile for machine: https://github.com/Justintime50/dotfiles
 1. [ ] Sign in to iCloud
 1. [ ] Copy working `git` folder from previous environment

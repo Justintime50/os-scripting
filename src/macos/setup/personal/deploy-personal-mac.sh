@@ -49,7 +49,13 @@ setup_preferences() {
     # Most of these will require a restart to take effect
     # Enable dark mode
     echo "Enabling dark mode..."
-    echo "$PASSWORD" | sudo -S defaults write /Library/Preferences/.GlobalPreferences.plist _HIEnableThemeSwitchHotKey -bool true
+    osascript <<EOD
+    tell application "System Events"
+        tell appearance preferences
+            set dark mode to true
+        end tell
+    end tell
+EOD
 
     # Enable trim for SSD's (may need to be run separately from the rest of this since it has its own prompt)
     # echo "Enabling Trim for SSDs..."
