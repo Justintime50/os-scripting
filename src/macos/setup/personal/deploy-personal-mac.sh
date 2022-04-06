@@ -16,7 +16,6 @@ main() {
         install_rosetta
         install_homebrew
         install_git
-        install_brewfile
         install_python_tools
         install_updates
         generate_ssh_key
