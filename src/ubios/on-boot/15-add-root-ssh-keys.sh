@@ -1,7 +1,10 @@
 #!/bin/sh
 
-## Places public keys in ~/.ssh/authorized_keys
-## Drop this file into `/mnt/data/on_boot.d` on the UDM
+# shellcheck disable=SC3039,SC3018,SC2086
+
+# Places public keys in ~/.ssh/authorized_keys
+# Drop this file into `/mnt/data/on_boot.d` on the UDM and then populate the `KEYS_SOURCE_FILE` with SSH keys
+# Docs: https://github.com/boostchicken-dev/udm-utilities
 
 KEYS_SOURCE_FILE="/mnt/data/on_boot.d/settings/ssh/authorized_keys"
 KEYS_TARGET_FILE="/root/.ssh/authorized_keys"
