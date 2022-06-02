@@ -20,7 +20,10 @@ def main():
         "cache-control": "no-cache",
     }
 
-    response = requests.request("POST", url, data=payload, headers=headers).json()
+    try:
+        response = requests.request("POST", url, data=payload, headers=headers).json()
+    except Exception:
+        raise
 
     monitors = response["monitors"]
     num_of_monitors = len(monitors)
