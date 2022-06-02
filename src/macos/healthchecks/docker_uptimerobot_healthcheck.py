@@ -45,9 +45,9 @@ def restart_docker():
             shell=True,
             timeout=30,
         )
-        print('UptimeRobot healthcheck failed, restarting Docker...')
+        raise Exception('UptimeRobot healthcheck failed, restarting Docker...')
     except Exception:
-        print('Failed to restart Docker!')
+        raise Exception('Failed to restart Docker!')
 
 
 if __name__ == "__main__":
