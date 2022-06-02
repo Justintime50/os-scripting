@@ -1,0 +1,54 @@
+import os
+import subprocess
+
+import requests
+
+# Check if your Docker instance is reachable by checking the overall uptime of your apps via UptimeRobot
+# Usage: UPTIME_ROBOT_API_KEY=123 venv/bin/python docker_uptimerobot_healthcheck.py
+
+
+API_KEY = os.getenv('UPTIME_ROBOT_API_KEY')
+MONITOR_DOWN_THRESHOLD = 0.3  # We expect 70% of the monitors to be up if Docker is reachable
+
+
+def main():
+    url = "https://api.uptimerobot.com/v2/getMonitors"
+
+    payload = f"api_key={API_KEY}&format=json"
+    headers = {
+        "content-type": "application/x-www-form-urlencoded",
+        "cache-control": "no-cache",
+    }
+
+    response = requests.request("POST", url, data=payload, headers=headers).json()
+
+    monitors = response["monitors"]
+    num_of_monitors = len(monitors)
+    up_monitor_status = 2  # per the UptimeRobot API docs, 2 is an "up" status and anything over it is "down"
+    num_of_down_monitors = len([up_monitor for up_monitor in monitors if up_monitor["status"] > up_monitor_status])
+    percentage_of_down_monitors = round(num_of_down_monitors / num_of_monitors, 2)
+
+    if percentage_of_down_monitors > MONITOR_DOWN_THRESHOLD:
+        restart_docker()
+    else:
+        print('UptimeRobot healthcheck passed.')
+
+
+def restart_docker():
+    try:
+        subprocess.run(
+            'killall Docker && sleep 5 && open /Applications/Docker.app',
+            stdout=subprocess.DEVNULL,
+            stdin=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            check=True,
+            shell=True,
+            timeout=30,
+        )
+        print('UptimeRobot healthcheck failed, restarting Docker...')
+    except Exception:
+        print('Failed to restart Docker!')
+
+
+if __name__ == "__main__":
+    main()
