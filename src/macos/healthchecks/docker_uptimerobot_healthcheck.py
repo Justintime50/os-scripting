@@ -20,10 +20,7 @@ def main():
         "cache-control": "no-cache",
     }
 
-    try:
-        response = requests.request("POST", url, data=payload, headers=headers).json()
-    except Exception:
-        raise
+    response = requests.request("POST", url, data=payload, headers=headers).json()
 
     monitors = response["monitors"]
     num_of_monitors = len(monitors)
@@ -40,7 +37,7 @@ def main():
 def restart_docker():
     try:
         subprocess.run(
-            'killall Docker && sleep 5 && open /Applications/Docker.app',
+            'killall -I Docker && killall -I "Docker Desktop" && killall -I com.docker.backend && sleep 10 && open /Applications/Docker.app',  # noqa
             stdout=subprocess.DEVNULL,
             stdin=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,

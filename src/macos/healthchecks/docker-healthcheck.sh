@@ -14,14 +14,16 @@ main() {
         case "$OSTYPE" in
         darwin*)
             echo "Docker's healthcheck failed, restarting Docker..." >&2
-            killall Docker &>/dev/null
-            sleep 5
+            killall -I Docker &>/dev/null
+            killall -I "Docker Desktop" &>/dev/null
+            killall -I com.docker.backend &>/dev/null
+            sleep 10
             open /Applications/Docker.app
             ;;
         linux-gnu*)
             echo "Docker's healthcheck failed, restarting Docker..." >&2
             service docker stop &>/dev/null
-            sleep 5
+            sleep 10
             service docker start
             ;;
         *)
