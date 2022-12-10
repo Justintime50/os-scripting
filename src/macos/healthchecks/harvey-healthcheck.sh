@@ -10,7 +10,7 @@
 main() {
     if curl -X GET localhost:5000/health 2>&1 | grep -q "Connection refused"; then
         echo "Harvey's healthcheck failed, restarting Harvey..."
-        killall -I uwsgi &>/dev/null
+        killall uwsgi &>/dev/null
         sleep 10
         cd "$HOME/git/personal/harvey" || exit 1
         make prod || exit 1

@@ -37,7 +37,7 @@ def main():
 def restart_docker():
     try:
         subprocess.run(
-            'killall -I Docker && killall -I "Docker Desktop" && killall -I com.docker.backend && sleep 10 && open /Applications/Docker.app',  # noqa
+            'killall Docker && killall "Docker Desktop" && killall com.docker.backend && sleep 10 && open /Applications/Docker.app',  # noqa
             stdout=subprocess.DEVNULL,
             stdin=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
