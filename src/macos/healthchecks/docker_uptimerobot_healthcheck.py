@@ -10,7 +10,7 @@ import requests
 
 API_KEY = os.getenv('UPTIME_ROBOT_API_KEY')
 MONITOR_DOWN_THRESHOLD = 0.3  # We expect 70% of the monitors to be up if Docker is reachable
-REQUEST_TIMEOUT = 30
+REQUEST_TIMEOUT = 60
 
 
 def main():
