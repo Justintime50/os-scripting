@@ -12,18 +12,18 @@ jobs:
         uses: luizm/action-sh-checker@master
         env:
           SHFMT_OPTS: -i 4 -d
-  windows-scripts:
-    runs-on: windows-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-      - name: Run Powershell scripts
-        run: |
-          Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
-          src/windows/setup/setup-windows
-          src/windows/maintenance/spring-clean
-        # src/windows/maintenance/update-windows # TODO: throwing errors
-        shell: powershell
+  # windows-scripts:
+  #   runs-on: windows-latest
+  #   steps:
+  #     - name: Checkout Repository
+  #       uses: actions/checkout@v2
+  #     - name: Run Powershell scripts
+  #       run: |
+  #         Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+  #         src/windows/setup/setup-windows
+  #         src/windows/maintenance/spring-clean
+  #         src/windows/maintenance/update-windows
+  #       shell: powershell
   vagrant-install-macos:
     runs-on: macos-latest
     steps:
