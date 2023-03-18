@@ -4,10 +4,10 @@
 
 main() {
     echo "Rebooting Harvey..."
-    killall uwsgi &>/dev/null || exit 1
+    killall uwsgi &>/dev/null
     sleep 10
     cd "$HOME/git/personal/harvey" || exit 1
-    make prod || exit 1
+    make prod
 }
 
 main
