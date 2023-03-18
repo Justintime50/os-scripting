@@ -5,7 +5,7 @@
 main() {
     echo "Rebooting Harvey..."
     killall uwsgi &>/dev/null || exit 1
-    sleep 5
+    sleep 10
     cd "$HOME/git/personal/harvey" || exit 1
     make prod || exit 1
 }
