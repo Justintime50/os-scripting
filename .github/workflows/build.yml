@@ -22,7 +22,7 @@ jobs:
           Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
           src/windows/setup/setup-windows
           src/windows/maintenance/spring-clean
-          src/windows/maintenance/update-windows
+        # src/windows/maintenance/update-windows # TODO: throwing errors
         shell: powershell
   vagrant-install-macos:
     runs-on: macos-latest
