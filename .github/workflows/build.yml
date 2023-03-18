@@ -44,7 +44,6 @@ jobs:
     needs:
       [
         "sh-checker",
-        "windows-scripts",
         "vagrant-install-macos",
         "vagrant-install-windows",
       ]
