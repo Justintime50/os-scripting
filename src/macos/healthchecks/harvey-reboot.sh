@@ -7,7 +7,7 @@ main() {
     killall uwsgi &>/dev/null
     sleep 10
     cd "$HOME/git/personal/harvey" || exit 1
-    make prod
+    make prod &>/dev/null
 }
 
 main
