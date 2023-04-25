@@ -7,10 +7,8 @@
 # 2) If bad ping, attempt to restart Docker
 # This script is intended be run as a cron job to ensure Docker remains running
 
-DOCKER_API_VERSION="1.41"
-
 main() {
-    if curl --unix-socket /var/run/docker.sock http:/v"$DOCKER_API_VERSION"/_ping 2>&1 | grep -q "Couldn't connect\|connection refused\|Bad response from Docker engine\|Something went wrong."; then
+    if curl --unix-socket /var/run/docker.sock http://localhost/_ping 2>&1 | grep -q "Couldn't connect\|connection refused\|Bad response from Docker engine\|Something went wrong."; then
         case "$OSTYPE" in
         darwin*)
             echo "Docker's healthcheck failed, restarting Docker..." >&2
