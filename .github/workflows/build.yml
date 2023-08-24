@@ -6,17 +6,14 @@ jobs:
   sh-checker:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-      - name: Run sh-checker
-        uses: luizm/action-sh-checker@master
+      - uses: actions/checkout@v3
+      - uses: luizm/action-sh-checker@master
         env:
           SHFMT_OPTS: -i 4 -d
   # windows-scripts:
   #   runs-on: windows-latest
   #   steps:
-  #     - name: Checkout Repository
-  #       uses: actions/checkout@v2
+  #     - uses: actions/checkout@v3
   #     - name: Run Powershell scripts
   #       run: |
   #         Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
@@ -27,33 +24,23 @@ jobs:
   vagrant-install-macos:
     runs-on: macos-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-      - name: Set up Homebrew
-        uses: Homebrew/actions/setup-homebrew@master
-      - name: Install project
-        run: ./src/vagrant/scripts/install.sh
+      - uses: actions/checkout@v3
+      - uses: Homebrew/actions/setup-homebrew@master
+      - run: ./src/vagrant/scripts/install.sh
   vagrant-install-windows:
     runs-on: windows-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-      - name: Install project
-        run: src/vagrant/scripts/install.bat
+      - uses: actions/checkout@v3
+      - run: src/vagrant/scripts/install.bat
   deploy:
-    needs:
-      [
-        "sh-checker",
-        "vagrant-install-macos",
-        "vagrant-install-windows",
-      ]
+    needs: ['sh-checker', 'vagrant-install-macos', 'vagrant-install-windows']
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to Harvey
         if: github.ref == 'refs/heads/main'
         uses: distributhor/workflow-webhook@v2
         env:
-          webhook_type: "json-extended"
+          webhook_type: 'json-extended'
           webhook_url: ${{ secrets.WEBHOOK_URL }}
           webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
           data: '{ "deployment_type": "pull" }'
