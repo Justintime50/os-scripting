@@ -50,11 +50,10 @@ def restart_docker():
         subprocess.run(
             'killall Docker && killall "Docker Desktop" && killall com.docker.backend && sleep 10 && open'
             ' /Applications/Docker.app',  # noqa
-            stdout=subprocess.DEVNULL,
-            stdin=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
+            stderr=subprocess.STDOUT,
             check=True,
             shell=True,
+            text=True,
             timeout=30,
         )
         raise Exception('UptimeRobot healthcheck failed, restarting Docker...')
