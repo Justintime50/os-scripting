@@ -9,9 +9,12 @@ main() {
     sudo scutil --set ComputerName "$NEW_COMPUTER_NAME"
     sudo scutil --set HostName "$NEW_COMPUTER_NAME"
     sudo scutil --set LocalHostName "$NEW_COMPUTER_NAME"
-    sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$NEW_COMPUTER_NAME"
 
-    dscacheutil -flushcache # flush the DNS cache for good measure
+    dscacheutil -flushcache
+
+    echo -e "Script complete.\n\nPress <enter> to restart for changes to take effect."
+    read -rn 1
+    sudo -S shutdown -h now
 }
 
 main "$1"
