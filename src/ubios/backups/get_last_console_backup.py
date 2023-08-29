@@ -9,7 +9,7 @@ UNIFI_IP = os.getenv('UNIFI_IP', '192.168.1.1')
 UNIFI_SITE = os.getenv('UNIFI_SITE', 'default')
 UNIFI_USERNAME = os.getenv('UNIFI_USERNAME')
 UNIFI_PASSWORD = os.getenv('UNIFI_PASSWORD')
-UNIFI_BACKUP_LOCATION = os.getenv('UNIFI_PASSWORD_LOCATION')
+UNIFI_BACKUP_LOCATION = os.path.expanduser(os.getenv('UNIFI_BACKUP_LOCATION'))
 TIMEOUT = 10
 
 # API Docs: https://ubntwiki.com/products/software/unifi-controller/api
@@ -37,6 +37,8 @@ def main():
         timeout=TIMEOUT,
     )
     csrf_token = login_response.headers.get('X-CSRF-Token')
+    if not csrf_token:
+        raise Exception('Failed to login! Please try again.')
     headers['X-CSRF-Token'] = csrf_token
 
     # Most deployments will only have a single session titled `default`, if not, you can get them with this
