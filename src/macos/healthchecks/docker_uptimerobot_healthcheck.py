@@ -46,7 +46,6 @@ def get_uptimerobot_monitors():
         ],
         allowed_methods=["POST"],
     )
-    requests_http_adapter = requests.adapters.HTTPAdapter(max_retries=retry_strategy)
     requests_session = requests.Session()
     requests_http_adapter = requests.adapters.HTTPAdapter(max_retries=retry_strategy)
     requests_session.mount(prefix="https://", adapter=requests_http_adapter)
