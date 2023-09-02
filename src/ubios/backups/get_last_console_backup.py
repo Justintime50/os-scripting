@@ -41,7 +41,7 @@ def main():
         raise Exception('Failed to login! Please try again.')
     headers['X-CSRF-Token'] = csrf_token
 
-    # Most deployments will only have a single session titled `default`, if not, you can get them with this
+    # Most deployments will only have a single site titled `default`, if not, you can get them with this
     # sites = session.get(
     #     f'https://{UNIFI_IP}/proxy/network/api/self/sites',
     #     headers=headers,
