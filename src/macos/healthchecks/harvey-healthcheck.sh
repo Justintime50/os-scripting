@@ -11,6 +11,8 @@ main() {
     if curl -X GET https://harveyapi.justinpaulhammond.com/health --max-time 10 2>&1 | grep -q "Connection refused\|timed out"; then
         echo "Harvey's healthcheck failed, restarting Harvey..."
         killall uwsgi &>/dev/null
+        docker rm harvey-harvey-nginx-1 --force
+        docker rm harvey-harvey-nginx-2 --force
         sleep 10
         cd "$HOME/git/personal/harvey" || exit 1
         just prod || exit 1
