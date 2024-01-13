@@ -8,7 +8,7 @@
 # This script is intended be run as a cron job to ensure Harvey remains running
 
 main() {
-    if curl -X GET https://harveyapi.justinpaulhammond.com/health --max-time 10 2>&1 | grep -q "Connection refused\|timed out"; then
+    if curl -X GET https://harveyapi.justinpaulhammond.com/health --max-time 15 2>&1 | grep -q "Connection refused\|timed out"; then
         echo "Harvey's healthcheck failed, restarting Harvey..."
         killall uwsgi &>/dev/null
         docker rm harvey-harvey-nginx-1 --force
