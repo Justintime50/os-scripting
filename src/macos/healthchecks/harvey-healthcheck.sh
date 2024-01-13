@@ -13,7 +13,6 @@ main() {
         killall uwsgi &>/dev/null
         docker rm harvey-harvey-nginx-1 --force
         docker rm harvey-harvey-nginx-2 --force
-        sleep 10
         cd "$HOME/git/personal/harvey" || exit 1
         just prod || exit 1
     else
