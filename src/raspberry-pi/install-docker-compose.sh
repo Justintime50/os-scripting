@@ -8,6 +8,7 @@ main() {
 
 install_docker_compose() {
     sudo apt-get install -y python3-pip libffi-dev
+    # TODO: This installs v1, upgrade to v2 docker compose
     sudo pip3 install docker-compose
 }
 
