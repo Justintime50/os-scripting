@@ -1,6 +1,5 @@
 import os
 import subprocess
-import sys
 
 import requests
 from urllib3.util.retry import Retry
@@ -11,7 +10,7 @@ from urllib3.util.retry import Retry
 
 API_KEY = os.getenv('UPTIME_ROBOT_API_KEY')
 MONITOR_DOWN_THRESHOLD = 0.3  # We expect 70% of the monitors to be up if Docker is reachable
-REQUEST_TIMEOUT = 60
+REQUEST_TIMEOUT = 60  # Keep at 60+, requests to UptimeRobot occasionally fail with a shorter timeout
 
 
 def main():
@@ -57,16 +56,13 @@ def get_uptimerobot_monitors():
         "cache-control": "no-cache",
     }
 
-    try:
-        response = requests.request(
-            "POST",
-            url,
-            data=payload,
-            headers=headers,
-            timeout=REQUEST_TIMEOUT,
-        )
-    except Exception as error:
-        sys.exit(error)
+    response = requests.request(
+        "POST",
+        url,
+        data=payload,
+        headers=headers,
+        timeout=REQUEST_TIMEOUT,
+    )
 
     return response.json()
 
@@ -74,7 +70,7 @@ def get_uptimerobot_monitors():
 def restart_docker():
     try:
         subprocess.run(
-            'killall Docker && killall "Docker Desktop" && killall com.docker.backend && sleep 10 && open /Applications/Docker.app',  # noqa
+            'killall Docker &>/dev/null; killall "Docker Desktop" &>/dev/null; killall com.docker.backend &>/dev/null; sleep 10; open /Applications/Docker.app',  # noqa
             stderr=subprocess.STDOUT,
             check=True,
             shell=True,
