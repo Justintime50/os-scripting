@@ -9,7 +9,7 @@ from urllib3.util.retry import Retry
 
 
 API_KEY = os.getenv('UPTIME_ROBOT_API_KEY')
-MONITOR_DOWN_THRESHOLD = 0.3  # We expect 70% of the monitors to be up if Docker is reachable
+MONITOR_DOWN_THRESHOLD = 0.25  # We expect 75% of the monitors to be up if Docker is reachable, restart otherwise
 REQUEST_TIMEOUT = 60  # Keep at 60+, requests to UptimeRobot occasionally fail with a shorter timeout
 
 
