@@ -5,6 +5,12 @@
 
 main() {
     echo "Setting up mail server..."
+
+    # Install postfix on Linux (included on macOS)
+    if [[ "$(uname)" == "Linux" ]]; then
+        sudo apt update && apt install -y postfix
+    fi
+
     # Setup mail credentials
     echo "smtp.gmail.com:587 EMAIL:PASSWORD" | sudo tee /etc/postfix/sasl_passwd >/dev/null
     echo "Please fill in the email and password in /etc/postfix/sasl_passwd, press any button to continue once this is done"
@@ -31,8 +37,12 @@ EOT
     sudo chmod 600 /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
 
     # Restart the mail server
-    sudo launchctl stop org.postfix.master
-    sudo launchctl start org.postfix.master
+    if [[ "$(uname)" == "Darwin" ]]; then
+        sudo launchctl stop org.postfix.master
+        sudo launchctl start org.postfix.master
+    elif [[ "$(uname)" == "Linux" ]]; then
+        sudo systemctl restart postfix
+    fi
 
     echo "Mail server configured!"
 }

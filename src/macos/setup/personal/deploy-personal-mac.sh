@@ -16,7 +16,6 @@ main() {
         install_rosetta
         install_homebrew
         install_git
-        install_python_tools
         install_updates
         generate_ssh_key
     } 2>~/deploy_script.log # End error logging wrapper
@@ -31,7 +30,7 @@ prompt_for_password() {
 
 change_computer_name() {
     # Change the computer name in all applicable places
-    echo -n "New computer name (eg: 'MacBook-Pro-Justin', 'Server', 'MacBook-Pro-Justin-EasyPost', etc): "
+    echo -n "New computer name (eg: 'mbp-justin', 'web1', etc): "
     read -r NEW_COMPUTER_NAME
 
     echo "$PASSWORD" | sudo -S scutil --set ComputerName "$NEW_COMPUTER_NAME"
@@ -123,8 +122,9 @@ EOD
     defaults write com.apple.AppleMultitouchMouse MouseVerticalScroll -integer 1
 
     # Setup Keyboard
-    echo "Setting up the Keyboard..."
-    defaults write com.apple.com.apple.touchbar.agent PresentationModeGlobal -string "fullControlStrip"
+    # Thanks goodness Apple killed the touchbar and we no longer need this...
+    # echo "Setting up the Keyboard..."
+    # defaults write com.apple.com.apple.touchbar.agent PresentationModeGlobal -string "fullControlStrip"
 
     # Setup power settings
     echo "Setting up power settings..."
@@ -187,15 +187,6 @@ install_git() {
     mkdir -p "$HOME"/git
 }
 
-install_python_tools() {
-    # TODO: This is highly inefficient, automate this instead of hard coding tools
-    if [[ "$HOSTNAME" == *"Server"* ]]; then
-        pip3 install forks-sync
-        pip3 install github-archive
-        pip3 install pullbug
-    fi
-}
-
 install_updates() {
     # Download updates, installation happens on a reboot
     echo "Attempting to install updates..."
@@ -209,7 +200,7 @@ generate_ssh_key() {
     echo "Generating an SSH key..."
     ssh-keygen -t rsa
     pbcopy <~/.ssh/id_rsa.pub
-    echo "Public SSH key copied to clipboard, please paste wherever it's needed."
+    echo "Public SSH key copied to clipboard, save to 1Pass and then paste wherever it's needed (eg: GitHub)."
 }
 
 cleanup() {
