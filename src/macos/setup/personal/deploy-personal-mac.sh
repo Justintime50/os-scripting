@@ -152,7 +152,14 @@ EOD
     # Battery power mode
     echo "$PASSWORD" | sudo -S pmset -b proximitywake 0
     echo "$PASSWORD" | sudo -S pmset -b sleep 60
-    echo "$PASSWORD" | sudo -S pmset -b displaysleep 60
+    echo "$PASSWORD" | sudo -S pmset -b displaysleep 20
+
+    # Screen Saver
+    defaults -currentHost write com.apple.screensaver idleTime -int 300
+    defaults write com.apple.screensaver askForPassword -int 1
+    defaults write com.apple.screensaver askForPasswordDelay -int 0
+    defaults write com.apple.dock wvous-br-corner -int 5
+    defaults write com.apple.dock wvous-br-modifier -int 0
 
     # Restart all the things so preferences take effect (must come last)
     killall Dock
