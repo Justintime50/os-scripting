@@ -61,7 +61,7 @@ EOD
 
     # Turn on Firewall
     echo "Turning on firewall..."
-    echo "$PASSWORD" | sudo -S defaults write /Library/Preferences/com.apple.alf globalstate -int 1
+    echo "$PASSWORD" | sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 
     # Enable Remote Management (will require additional configuration through System Preferences for Mojave 10.14 and higher)
     echo "Turning on remote management & login..."
