@@ -96,7 +96,7 @@ EOD
     defaults write com.apple.AppleMultitouchTrackpad TrackpadFiveFingerPinchGesture -integer 2
     defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerHorizSwipeGesture -integer 2
     defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerPinchGesture -integer 2
-    defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerVertSwipeGesture -integer 2
+    defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerVertSwipeGesture -integer 3
     defaults write com.apple.AppleMultitouchTrackpad TrackpadHorizScroll -integer 1
     defaults write com.apple.AppleMultitouchTrackpad TrackpadMomentumScroll -integer 1
     defaults write com.apple.AppleMultitouchTrackpad TrackpadPinch -integer 1
@@ -155,6 +155,7 @@ EOD
     echo "$PASSWORD" | sudo -S pmset -b displaysleep 20
 
     # Screen Saver
+    echo "Setting up Screen Saver..."
     defaults -currentHost write com.apple.screensaver idleTime -int 300
     defaults write com.apple.screensaver askForPassword -int 1
     defaults write com.apple.screensaver askForPasswordDelay -int 0
@@ -213,12 +214,12 @@ generate_ssh_key() {
 cleanup() {
     # Clean up after the script runs and reboot
     open ~/deploy_script.log # Open the log and have the user check for errors before finishing
-    echo -e "Script complete.\nPlease check error log (automatically opened) before restarting.\n\nPress <enter> to restart."
+    echo -e "Script complete.\nPlease check error log (automatically opened) before rebooting.\n\nPress <enter> to reboot."
     read -rn 1
-    echo "Shutting down..."
+    echo "Rebooting..."
     sleep 5
     history -c
-    echo "$PASSWORD" | sudo -S shutdown -h now
+    echo "$PASSWORD" | sudo reboot
 }
 
 main
