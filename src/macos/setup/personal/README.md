@@ -32,6 +32,7 @@ The following can be done in any order after the above section:
   - [ ] Set `git` as default location when Finder opens
 - [ ] Set ethernet preference over wifi when available
 - [ ] Enable time machine
+- [ ] Setup login items
 - [ ] Install App Store specific items (Final Cut Pro, Logic Pro, etc)
 - [ ] Remove unneeded apps from Apple
 
