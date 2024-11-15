@@ -56,6 +56,9 @@ if echo "$PASSWORD" | sudo dmidecode -s system-manufacturer | grep -qi "apple"; 
     echo "$PASSWORD" | sudo update-grub2
 fi
 
+# Change shell
+chsh -s "$(which zsh)"
+
 # Cleanup and reboot
 echo -e "Script complete.\nPlease check output before rebooting.\n\nPress <enter> to reboot."
 read -rn 1
