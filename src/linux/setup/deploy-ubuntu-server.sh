@@ -7,9 +7,11 @@ echo -n "Admin Password: "
 read -rs PASSWORD
 
 # Update packages
+echo "Updating packages..."
 echo "$PASSWORD" | sudo apt update && sudo apt upgrade -y
 
 # Install Docker
+echo "Installing Docker..."
 echo "$PASSWORD" | sudo snap remove docker
 for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do echo "$PASSWORD" | sudo apt-get remove $pkg; done
 echo "$PASSWORD" | sudo apt-get install ca-certificates curl
@@ -33,31 +35,37 @@ echo "$PASSWORD" | sudo systemctl enable docker
 echo "$PASSWORD" | sudo systemctl start docker
 
 # Setup firewall
+echo "Setting up firewall..."
 echo "$PASSWORD" | sudo ufw allow OpenSSH
 echo "$PASSWORD" | sudo ufw allow 80
 echo "$PASSWORD" | sudo ufw allow 443
 echo "$PASSWORD" | sudo ufw enable
 
 # Install other packages
+echo "Installing other packages..."
 echo "$PASSWORD" | sudo apt install -y \
     composer \
     fail2ban \
     neovim \
     python3-pip \
-    python3-venv
+    python3-venv \
+    zsh
 
 # Install Homebrew
+echo "Installing Homebrew..."
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Disable IOMMU if running on a Mac
 # https://www.reddit.com/r/linux_on_mac/comments/w3hisc/network_dropout_fix_for_linux_on_mac_with_kernel/
 if echo "$PASSWORD" | sudo dmidecode -s system-manufacturer | grep -qi "apple"; then
-    echo "$PASSWORD" | sudo sed -i \ 's/^GRUB_CMDLINE_LINUX=\"/GRUB_CMDLINE_LINUX=\"iommu.passthrough=1 /' \ /etc/default/grub
+    echo "Disabling IOMMU..."
+    echo "$PASSWORD" | sudo sed -i 's/^GRUB_CMDLINE_LINUX="/GRUB_CMDLINE_LINUX="iommu.passthrough=1 /' /etc/default/grub
     echo "$PASSWORD" | sudo update-grub2
 fi
 
 # Change shell
-chsh -s "$(which zsh)"
+echo "Changing shell..."
+echo "PASSWORD" | chsh -s /bin/zsh
 
 # Cleanup and reboot
 echo -e "Script complete.\nPlease check output before rebooting.\n\nPress <enter> to reboot."
