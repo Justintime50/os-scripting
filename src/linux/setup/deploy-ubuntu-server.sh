@@ -24,7 +24,7 @@ echo \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" |
     sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 echo "$PASSWORD" | sudo apt-get update
-echo "$PASSWORD" | sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+echo "$PASSWORD" | sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 # Fix Docker permissions
 echo "$PASSWORD" | sudo usermod -aG docker "$USER"
@@ -66,6 +66,10 @@ fi
 # Change shell
 echo "Changing shell..."
 echo "PASSWORD" | chsh -s /bin/zsh
+
+# Generage SSH key
+ssh-keygen -t rsa
+echo "SSH key generated, please copy to GitHub or wherever it's needed."
 
 # Cleanup and reboot
 echo -e "Script complete.\nPlease check output before rebooting.\n\nPress <enter> to reboot."
