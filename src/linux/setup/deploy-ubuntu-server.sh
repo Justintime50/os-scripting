@@ -64,7 +64,7 @@ fi
 
 # Change shell
 echo "Changing shell..."
-echo "PASSWORD" | chsh -s /bin/zsh
+echo "$PASSWORD" | chsh -s /bin/zsh
 
 # Generage SSH key
 ssh-keygen -t rsa
