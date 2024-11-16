@@ -28,7 +28,6 @@ echo "$PASSWORD" | sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
 # Fix Docker permissions
 echo "$PASSWORD" | sudo usermod -aG docker "$USER"
-newgrp docker
 
 # Start Docker on boot
 echo "$PASSWORD" | sudo systemctl enable docker
