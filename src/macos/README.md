@@ -44,7 +44,7 @@ To run a script without downloading this entire project, use the following. Chan
 
 ```bash
 # NOTE: not all scripts in this project can be run this way, some require being downloaded which is the recommended approach
-bash <(curl -s https://raw.githubusercontent.com/justintime50/mac-scripting/main/src/scripts/companies/buyboxexperts/deploy-bbe-mac.command)
+bash <(curl -s https://raw.githubusercontent.com/Justintime50/os-scripting/refs/heads/main/src/linux/setup/deploy-ubuntu-server.sh)
 ```
 
 ### Creating Scripts
