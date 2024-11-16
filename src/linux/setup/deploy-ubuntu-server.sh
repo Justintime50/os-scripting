@@ -58,7 +58,7 @@ echo "Installing Homebrew..."
 # https://www.reddit.com/r/linux_on_mac/comments/w3hisc/network_dropout_fix_for_linux_on_mac_with_kernel/
 if echo "$PASSWORD" | sudo dmidecode -s system-manufacturer | grep -qi "apple"; then
     echo "Disabling IOMMU..."
-    echo "$PASSWORD" | sudo sed -i 's/^GRUB_CMDLINE_LINUX="/GRUB_CMDLINE_LINUX="iommu.passthrough=1 /' /etc/default/grub
+    echo "$PASSWORD" | sudo sed -i 's/^GRUB_CMDLINE_LINUX="/GRUB_CMDLINE_LINUX="iommu.passthrough=1/' /etc/default/grub
     echo "$PASSWORD" | sudo update-grub2
 fi
 
