@@ -45,6 +45,7 @@ echo "Installing other packages..."
 echo "$PASSWORD" | sudo apt install -y \
     composer \
     fail2ban \
+    just \
     neovim \
     python3-pip \
     python3-venv \
