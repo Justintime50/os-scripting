@@ -8,7 +8,7 @@ main() {
 
     # Install postfix on Linux (included on macOS)
     if [[ "$(uname)" == "Linux" ]]; then
-        sudo apt update && apt install postfix
+        sudo apt update && sudo apt install postfix
     fi
 
     # Setup mail credentials

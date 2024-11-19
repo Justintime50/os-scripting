@@ -48,6 +48,7 @@ echo "$PASSWORD" | sudo -S apt install -y \
     just \
     neovim \
     python3-pip \
+    python3-requests \
     python3-venv \
     zsh
 
