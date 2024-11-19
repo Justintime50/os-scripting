@@ -64,6 +64,12 @@ if echo "$PASSWORD" | sudo -S dmidecode -s system-manufacturer | grep -qi "apple
     echo "$PASSWORD" | sudo -S update-grub2
 fi
 
+# Disable MOTD
+echo "$PASSWORD" | sudo -S systemctl disable motd-news.timer
+echo "$PASSWORD" | sudo -S systemctl stop motd-news.timer
+echo "$PASSWORD" | sudo -S sed -i '/pam_motd\.so/s/^/#/' /etc/pam.d/sshd
+echo "$PASSWORD" | sudo -S sed -i '/pam_motd\.so/s/^/#/' /etc/pam.d/login
+
 # Setup directories
 echo "Setting up directories..."
 mkdir -p git
