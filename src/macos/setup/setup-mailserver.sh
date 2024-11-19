@@ -8,10 +8,11 @@ main() {
 
     # Install postfix on Linux (included on macOS)
     if [[ "$(uname)" == "Linux" ]]; then
-        sudo apt update && apt install -y postfix
+        sudo apt update && apt install postfix
     fi
 
     # Setup mail credentials
+    sudo mkdir -p /etc/postfix
     echo "smtp.gmail.com:587 EMAIL:PASSWORD" | sudo tee /etc/postfix/sasl_passwd >/dev/null
     echo "Please fill in the email and password in /etc/postfix/sasl_passwd, press any button to continue once this is done"
     read -rn 1
