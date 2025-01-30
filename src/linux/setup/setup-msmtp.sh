@@ -2,12 +2,12 @@
 
 EMAIL="$1"
 PASSWORD="$2" # Use a Gmail app password, not your main password
-CONFIG_FILE="$HOME/.msmtprc"
+CONFIG_FILEPATH="/etc/msmtprc"
 
 sudo apt update
 sudo apt install -y msmtp ca-certificates
 
-cat <<EOF >"$CONFIG_FILE"
+sudo tee "$CONFIG_FILEPATH" <<EOF
 # msmtp configuration for Gmail
 defaults
 auth           on
@@ -25,7 +25,7 @@ password       $PASSWORD
 account default : gmail
 EOF
 
-chmod 600 "$CONFIG_FILE"
-
-echo -e "Subject: Test Email\n\nThis is a test email." | msmtp --debug --from=default -t "$EMAIL"
+chmod 600 "$CONFIG_FILEPATH"
+sudo ln -s "$(which msmtp)" /usr/sbin/sendmail
+echo "Subject: Test Email" | sendmail -v "$EMAIL"
 echo "msmtp configuration complete. Check your inbox for the test email."
