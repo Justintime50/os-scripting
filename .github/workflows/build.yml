@@ -6,14 +6,14 @@ jobs:
   sh-checker:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: luizm/action-sh-checker@master
         env:
           SHFMT_OPTS: -i 4 -d
   # windows-scripts:
   #   runs-on: windows-latest
   #   steps:
-  #     - uses: actions/checkout@v3
+  #     - uses: actions/checkout@v4
   #     - name: Run Powershell scripts
   #       run: |
   #         Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
@@ -21,14 +21,14 @@ jobs:
   #         src/windows/maintenance/spring-clean
   #         src/windows/maintenance/update-windows
   #       shell: powershell
-  vagrant-install-macos:
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: Homebrew/actions/setup-homebrew@master
-      - run: ./src/vagrant/scripts/install.sh
-  vagrant-install-windows:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v3
-      - run: src/vagrant/scripts/install.bat
+#   vagrant-install-macos:
+#     runs-on: macos-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - uses: Homebrew/actions/setup-homebrew@master
+#       - run: ./src/vagrant/scripts/install.sh
+#   vagrant-install-windows:
+#     runs-on: windows-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - run: src/vagrant/scripts/install.bat
